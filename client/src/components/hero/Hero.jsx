@@ -5,7 +5,7 @@ import Bannerx from './Banner';
 
 const Hero = () => {
   return (
-    <section className='lg:px-[7rem] md:px-[5rem] px-2 '>
+    <section className='lg:px-[7rem] md:px-[5rem] px-2 mt-7'>
       <div className='grid lg:grid-cols-2 grid-cols-1'>
       <div className='grid md:grid-cols-2 grid-cols-1 mt-5 p-2'>
         <div className='text-center md:text-left  '>
