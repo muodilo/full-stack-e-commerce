@@ -5,7 +5,7 @@ import { CiLogin } from "react-icons/ci";
 
 const Navbar = () => {
   return (
-    <section className='bg-blue-700/60'>
+    <section className='bg-blue-400 left-0 right-0 fixed z-30'>
       <div className='lg:px-[7rem] md:px-[5rem] px-2 py-2 grid md:grid-cols-4 grid-cols-1'>
         <div className='grid grid-cols-2'>
           <h1 className='lg:text-3xl text-xl font-bold text-white flex items-center'>E-SHOP</h1>

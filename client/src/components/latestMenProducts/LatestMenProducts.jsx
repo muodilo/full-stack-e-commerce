@@ -1,11 +1,11 @@
 import React from 'react'
 
-const FeauturedProducts = () => {
+const LatestMenProducts = () => {
   return (
     <section>
       <div className='lg:px-[7rem] md:px-[5rem] px-2 pt-20'>
 
-        <h1 className='text-center text-4xl font-bold mb-5'>Featured products</h1>
+        <h1 className='text-center text-4xl font-bold mb-5'>Men products</h1>
         <hr />
         <div className=' grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1'>
           
@@ -53,10 +53,11 @@ const FeauturedProducts = () => {
             </div>
           </div>
           
-      </div>
+        </div>
+        <button>Explore more</button>
       </div>
     </section>
   )
 }
 
-export default FeauturedProducts
+export default LatestMenProducts
