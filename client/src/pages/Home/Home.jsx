@@ -4,6 +4,7 @@ import Hero from '../../components/hero/Hero';
 import FeauturedProducts from '../../components/featuredProducts/FeauturedProducts';
 import LatestMenProducts from '../../components/latestMenProducts/LatestMenProducts';
 import LatestWomenProducts from '../../components/latestWomenProducts/LatestWomenProducts';
+import LatestKidsProducts from '../../components/LatestKidsProducts/LatestKidsProducts';
 
 const Home = () => {
 
@@ -16,6 +17,7 @@ const Home = () => {
       <FeauturedProducts />
       <LatestMenProducts />
       <LatestWomenProducts />
+      <LatestKidsProducts/>
     </section>
   )
 }
