@@ -1,17 +1,17 @@
 import React from 'react'
 
-const LatestMenProducts = () => {
+const LatestWomenProducts = () => {
   return (
     <section>
       <div className='lg:px-[7rem] md:px-[5rem] px-2 pt-20'>
 
-        <h1 className='text-center text-4xl font-bold mb-5'>Latest Men products</h1>
+        <h1 className='text-center text-4xl font-bold mb-5'>Latest Women products</h1>
         <hr />
         <div className=' grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1'>
           
           <div className=" p-4 w-full">
             <a className="block relative h-48 rounded overflow-hidden">
-              <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
+              <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://images.pexels.com/photos/1127000/pexels-photo-1127000.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
             </a>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
@@ -22,7 +22,7 @@ const LatestMenProducts = () => {
           
           <div className=" p-4 w-full">
             <a className="block relative h-48 rounded overflow-hidden">
-              <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://images.pexels.com/photos/447570/pexels-photo-447570.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"/>
+              <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://images.pexels.com/photos/1383869/pexels-photo-1383869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
             </a>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
@@ -33,7 +33,7 @@ const LatestMenProducts = () => {
           
           <div className=" p-4 w-full">
             <a className="block relative h-48 rounded overflow-hidden">
-              <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://images.pexels.com/photos/11451503/pexels-photo-11451503.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"/>
+              <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://images.pexels.com/photos/821413/pexels-photo-821413.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
             </a>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
@@ -44,7 +44,7 @@ const LatestMenProducts = () => {
           
           <div className=" p-4 w-full">
             <a className="block relative h-48 rounded overflow-hidden">
-              <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://images.pexels.com/photos/6428968/pexels-photo-6428968.jpeg"/>
+              <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://images.pexels.com/photos/3555936/pexels-photo-3555936.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
             </a>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
@@ -62,4 +62,4 @@ const LatestMenProducts = () => {
   )
 }
 
-export default LatestMenProducts
+export default LatestWomenProducts
