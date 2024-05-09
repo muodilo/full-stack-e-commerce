@@ -27,13 +27,13 @@ const Navbar = () => {
             <Link to='/'>SHOP</Link>
           </li>
           <li className='me-5  '>
-            <Link to='/about'>MEN</Link>
+            <Link to='/men'>MEN</Link>
           </li>
           <li className='pe-5  transition'>
-            <Link to='/projects'>WOMEN</Link>
+            <Link to='/women'>WOMEN</Link>
           </li>
           <li className='me-5  transition'>
-            <Link to='/blog'>KID</Link>
+            <Link to='/kid'>KIDS</Link>
           </li>
           <li className='me-5  transition'>
             <Link to='/contact'>CONTACT</Link>
@@ -55,7 +55,7 @@ const Navbar = () => {
               <a href="" className='block  hover:text-black lg:text-xl'>WOMAN</a>
             </li>
             <li className='me-4'>
-              <a href="" className='block  hover:text-black lg:text-xl'>KID</a>
+              <a href="" className='block  hover:text-black lg:text-xl'>KIDS</a>
             </li>
             <li className='me-4'>
               <a href="" className='block  hover:text-black lg:text-xl'>CONTACT</a>
