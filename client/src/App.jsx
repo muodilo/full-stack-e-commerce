@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import Navbar from './components/navBar/Navbar';
 import SwapTheme from './components/SwapTheme/SwapTheme';
 import Footer from './components/Footer/Footer';
+import MenPage from './pages/menPage/MenPage';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <SwapTheme/>
       <Routes>
         <Route path='/' element={<Home/> } />
+        <Route path='/men' element={<MenPage/> } />
       </Routes>
       <Footer/>
       <ToastContainer/>

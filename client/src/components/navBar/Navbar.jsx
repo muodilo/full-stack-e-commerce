@@ -46,10 +46,10 @@ const Navbar = () => {
         <div className='md:flex md:items-center hidden lg:ms-16 ms-15'>
           <ul className='flex justify-around items-center w-full h-full text-white'>
             <li className='me-4'>
-              <a href="" className='block  hover:text-black lg:text-xl'>SHOP</a>
+              <Link to="/" className='block  hover:text-black lg:text-xl'>SHOP</Link>
             </li>
             <li className='me-4'>
-              <a href="" className='block  hover:text-black lg:text-xl'>MEN</a>
+              <Link to="/men" className='block  hover:text-black lg:text-xl'>MEN</Link>
             </li>
             <li className='me-4'>
               <a href="" className='block  hover:text-black lg:text-xl'>WOMAN</a>
