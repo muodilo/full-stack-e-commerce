@@ -55,7 +55,7 @@ const LatestKidsProducts = () => {
           
         </div>
         <div className='text-center'>
-          <button className='btn btn-active '>Explore more</button>
+          <button className='btn btn-active animate-bounce '>Explore more</button>
         </div>
       </div>
     </section>
