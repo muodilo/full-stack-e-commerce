@@ -14,6 +14,8 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use('/api/v1/users', require('./routes/userRoutes.js'));
+
 app.use(errorHandler);
 
 app.listen(port, console.log(`server is running on port ${port}`));

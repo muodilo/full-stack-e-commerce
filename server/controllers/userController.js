@@ -1,4 +1,4 @@
-const asyncHandler = requuire('express-async-handler');
+const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -58,4 +58,8 @@ const generateToken = (id) => {
     }
   )
   return token
+}
+
+module.exports = {
+  createUser,
 }
