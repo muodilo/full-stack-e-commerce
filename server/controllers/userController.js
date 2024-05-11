@@ -64,7 +64,7 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 
     //check if provided password matches the stored hashed password
-    const isPasswordMatch = await bcrypt.compare(password, user, password);
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
 
     if (!isPasswordMatch) {
       res.status(401)
