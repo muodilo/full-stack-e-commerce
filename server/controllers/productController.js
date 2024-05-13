@@ -21,15 +21,8 @@ const createProduct = asyncHandler(async (req, res) => {
       quantity,
       images,
     })
+    res.status(200).json('Product is created successfully');
     
-    if (!product) {
-      res.status(404)
-      throw new Error("create Product failed");
-    } else {
-      res.status(200)
-      res.json(product);
-    }
-
   } catch (error) {
     res.status(500)
     throw new Error(error.message);
