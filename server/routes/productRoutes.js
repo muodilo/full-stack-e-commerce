@@ -13,7 +13,7 @@ router.get('/currentMenProducts', getCurrentMenProducts);
 router.get('/men', getAllMenProducts);
 router.get('/currentWomenProducts', getCurrentWomenProducts);
 router.get('/women', getAllWomenProducts);
-router.get('/currentKidsProducts', getCurrentWomenProducts);
-router.get('/kids', getAllWomenProducts);
+router.get('/currentKidsProducts', getCurrentKidsProducts);
+router.get('/kids', getAllKidsProducts);
 
 module.exports = router;
