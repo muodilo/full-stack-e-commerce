@@ -30,12 +30,12 @@ const createProduct = asyncHandler(async (req, res) => {
 })
 
 const updateProduct = asyncHandler(async (req, res) => {
-  const productId = req.params;
+  const productId = req.params.id;
   const { name, description, price, discountPrice, category, type, quantity, images } = req.body;
 
   try {
     //check if product exists
-    const product = await Product.findById({ productId });
+    let product = await Product.findById(productId);
 
     if (!product) {
       res.status(404).json({ message: 'Product not found' });
@@ -52,9 +52,32 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.images = images || product.images;
 
     product = await product.save();
-        
+    
+    res.status(200).json({mesage:'Product Updated successfully',product});
+
   } catch (error) {
     res.status(404)
+    throw new Error(error.message);
+  }
+})
+
+const deleteProduct = asyncHandler(async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    //check if product exists
+    const product = await productId.findById(productId);
+
+    if (!product) {
+      res.status(404)
+      throw new Error('product does not exist');
+    }
+
+    await product.deleteOne();
+    
+    res.status(200).json('Product is deleted successfully');
+  } catch (error) {
+    res.status(500)
     throw new Error(error.message);
   }
 })
@@ -62,4 +85,5 @@ const updateProduct = asyncHandler(async (req, res) => {
 module.exports = {
   createProduct,
   updateProduct,
+  deleteProduct
 }
