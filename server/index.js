@@ -15,7 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/v1/users', require('./routes/userRoutes.js'));
-app.use('/api/v1/products',require('./routes/productRoutes.js'))
+app.use('/api/v1/products', require('./routes/productRoutes.js'));
+app.use('/api/v1/cart', require('./routes/cartRoutes.js'));
 
 app.use(errorHandler);
 
