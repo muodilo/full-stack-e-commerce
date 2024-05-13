@@ -14,4 +14,4 @@ const checkAdmin = asyncHandler(async (req, res, next) => {
   }
 })
 
-module, exports = checkAdmin;
+module.exports = checkAdmin;
