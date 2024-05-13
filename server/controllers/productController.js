@@ -95,6 +95,38 @@ const getAllProducts = asyncHandler(async (req, res) => {
   }
 })
 
+const getCurrentWomenProducts = asyncHandler(async (req, res) => {
+  try {
+    const products = await Product.find({ category: 'women' }).sort({ createdAt: -1 }).limit(4);
+
+    if (!products || products.length === 0) {
+      res.status(404).json('there is no product available');
+    } else {
+      res.status(200).json(products);
+    }
+
+  } catch (error) {
+    res.status(500)
+    throw new Error(error.message);
+  }
+})
+
+const getAllWomenProducts = asyncHandler(async (req, res) => {
+  try {
+    const products = await Product.find({ category: 'women' }).sort({ createdAt: -1 })
+
+    if (!products || products.length === 0) {
+      res.status(404).json('there is no product available');
+    } else {
+      res.status(200).json(products);
+    }
+
+  } catch (error) {
+    res.status(500)
+    throw new Error(error.message);
+  }
+})
+
 const getCurrentMenProducts = asyncHandler(async (req, res) => {
   try {
     const products = await Product.find({ category: 'men' }).sort({ createdAt: -1 }).limit(4);
@@ -134,4 +166,7 @@ module.exports = {
   getAllProducts,
   getCurrentMenProducts,
   getAllMenProducts,
+  getCurrentWomenProducts,
+  getAllWomenProducts,
+
 }
