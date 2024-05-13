@@ -61,4 +61,5 @@ const updateProduct = asyncHandler(async (req, res) => {
 
 module.exports = {
   createProduct,
+  updateProduct,
 }
