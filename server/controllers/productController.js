@@ -66,7 +66,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
   try {
     //check if product exists
-    const product = await productId.findById(productId);
+    const product = await Product.findById(productId);
 
     if (!product) {
       res.status(404)
@@ -74,7 +74,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
     }
 
     await product.deleteOne();
-    
+
     res.status(200).json('Product is deleted successfully');
   } catch (error) {
     res.status(500)
@@ -82,8 +82,18 @@ const deleteProduct = asyncHandler(async (req, res) => {
   }
 })
 
+const getAllProducts = asyncHandler(async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.status(200).json(products)
+  } catch (error) {
+    throw new Error(error.message);
+  }
+})
+
 module.exports = {
   createProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  getAllProducts
 }
