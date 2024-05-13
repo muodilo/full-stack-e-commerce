@@ -1,5 +1,5 @@
 const express = require('express');
-const { createProduct,updateProduct,deleteProduct,getAllProducts,getCurrentMenProducts,getAllMenProducts } = require('../controllers/productController.js');
+const { createProduct,updateProduct,deleteProduct,getAllProducts,getCurrentMenProducts,getAllMenProducts,getCurrentWomenProducts,getAllWomenProducts, } = require('../controllers/productController.js');
 const protect = require('../middleware/authMiddleware.js');
 const checkAdmin  = require('../middleware/adminMiddleware.js');
 
@@ -11,5 +11,7 @@ router.delete('/:id', protect, checkAdmin, deleteProduct);
 router.get('/', getAllProducts);
 router.get('/currentMenProducts', getCurrentMenProducts);
 router.get('/men', getAllMenProducts);
+router.get('/currentWomenProducts', getCurrentWomenProducts);
+router.get('/women', getAllWomenProducts);
 
 module.exports = router;
