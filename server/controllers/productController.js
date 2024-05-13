@@ -29,6 +29,36 @@ const createProduct = asyncHandler(async (req, res) => {
   }
 })
 
+const updateProduct = asyncHandler(async (req, res) => {
+  const productId = req.params;
+  const { name, description, price, discountPrice, category, type, quantity, images } = req.body;
+
+  try {
+    //check if product exists
+    const product = await Product.findById({ productId });
+
+    if (!product) {
+      res.status(404).json({ message: 'Product not found' });
+      return;
+    }
+
+    product.name = name || product.name;
+    product.description = description || product.description;
+    product.price = price || product.price;
+    product.discountPrice = discountPrice || product.discountPrice;
+    product.category = category || product.category;
+    product.type = type || product.type;
+    product.quantity = quantity || product.quantity;
+    product.images = images || product.images;
+
+    product = await product.save();
+        
+  } catch (error) {
+    res.status(404)
+    throw new Error(error.message);
+  }
+})
+
 module.exports = {
   createProduct,
 }
