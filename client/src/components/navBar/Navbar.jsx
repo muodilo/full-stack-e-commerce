@@ -63,7 +63,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className=' md:flex md:ms-40 lg:ms-auto hidden'>
-          <button className='flex items-center text-xl'><CiLogin className='me-1'/> Login</button>
+          <Link to='/sign-up' className='flex items-center text-xl'><CiLogin className='me-1'/> Login</Link>
         </div>
         <div className='md:flex hidden'>
         <div className="relative  ms-auto">

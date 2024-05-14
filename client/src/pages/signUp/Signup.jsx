@@ -1,56 +1,130 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { FloatingLabel } from 'flowbite-react';
+import { toast } from 'react-toastify';
+// import { register,resetUser } from '../../features/auth/authSlice';
+import './signup.css';
 
 const Signup = () => {
+
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    password2:'',
+  })
+
+  const { username, email, password, password2 } = formData;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // const { user, isError, isSuccess, isLoading, message } = useSelector(state => state.reducer.auth);
+
+  // useEffect(() => {
+  //   if (isError) {
+  //     toast.error(message);
+  //   }
+
+  //   //redirect when logged in
+  //   if (isSuccess || user) {
+  //     navigate('/')
+  //   }
+
+  //   dispatch(resetUser());
+  // }, [isError, isSuccess, user, message, dispatch])
+
+  const onChange = (e) => {  
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]:e.target.value,
+
+    }))
+  }
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // if (password !== password2) {
+    //   toast.error('password mismatch');
+    // } else {
+    //   const userData = {
+    //     username,
+    //     email,
+    //     password,
+    //   }
+
+    //   try {
+    //     await dispatch(register(userData));
+        
+    //     // After successful registration, navigate to the login page
+    //     navigate('/login');
+    //   } catch (error) {
+    //     toast.error('Registration failed. Please try again.');
+    //   }
+    // }
+  };
+
+
   return (
-<section className="text-gray-600 body-font">
-  <div className="lg:px-[7rem] md:px-[5rem] px-2  mx-auto flex flex-wrap items-center">
-    <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
-      <h1 className="title-font font-medium text-3xl text-gray-900">Welcomr to E-SHOP</h1>
-      <p className="leading-relaxed mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi cumque odit illo pariatur velit neque temporibus ipsa. Illo, modi a?</p>
-    </div>
-    <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
-      <h2 className="text-gray-900 text-lg font-medium title-font mb-5">Sign Up</h2>
-      <div className="relative mb-4">
-        <label htmlFor="full-name" className="leading-7 text-sm text-gray-600">User name</label>
-            <input
-              type="text"
-              id="full-name"
-              name="full-name"
-              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
+<section className=' px-0 md:px-[60px] lg:px-[100px] md:mb-10"'>
+      <div className=' pb-[70px] px-5 md:px-44 lg:px-80' >
+        <h1 className='mb-5 mt-10 text-lg'>Register</h1>
+
+        <form onSubmit={handleSubmit}>
+          <FloatingLabel
+            variant="outlined"
+            label="Name"
+            name='username'
+            type='text'
+            required
+            className='mb-3'
+            value={username}
+            onChange={onChange}
+          />
+          
+          <FloatingLabel
+            variant="outlined"
+            label="Email address"
+            name='email'
+            type='email'
+            required
+            className='mb-3'
+            value={email}
+            onChange={onChange}
+          />
+          
+          <FloatingLabel
+            variant="outlined"
+            label="Create Password"
+            name='password'
+            type='password'
+            required
+            className='mb-3'
+            value={password}
+            onChange={onChange}
+          />
+          
+          <FloatingLabel
+            variant="outlined"
+            label="Confirm Password"
+            name='password2'
+            type='password'
+            required className='mb-3'
+            value={password2}
+            onChange={onChange}
+          />
+          
+          <button type='submit' className='btn btn-primary my-2'>Sign Up</button>
+        <p className='mt-3 mb-3'>Already have an account <Link to='/login' className='text-blue-600'>Login Here</Link></p>
+        </form>
+
       </div>
-      <div className="relative mb-4">
-        <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
-      </div>
-      <div className="relative mb-4">
-        <label htmlFor="email" className="leading-7 text-sm text-gray-600">Password</label>
-            <input
-              type="password"
-              id="email"
-              name="email"
-              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
-      </div>
-      <div className="relative mb-4">
-        <label htmlFor="email" className="leading-7 text-sm text-gray-600">confirm Password</label>
-            <input
-              type="password"
-              id="email"
-              name="email"
-              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
-      </div>
-      <button className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
-      <p className="text-xs text-gray-500 mt-3">Literally you probably haven't heard of them jean shorts.</p>
-    </div>
-  </div>
-</section>
+
+
+    </section>
   )
 }
 
