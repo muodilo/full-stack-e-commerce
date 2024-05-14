@@ -6,6 +6,7 @@ import Navbar from './components/navBar/Navbar';
 import SwapTheme from './components/SwapTheme/SwapTheme';
 import Footer from './components/Footer/Footer';
 import MenPage from './pages/menPage/MenPage';
+import Signup from './pages/signUp/Signup';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/> } />
         <Route path='/men' element={<MenPage/> } />
+        <Route path='/signup' element={<Signup/> } />
       </Routes>
       <Footer/>
       <ToastContainer/>

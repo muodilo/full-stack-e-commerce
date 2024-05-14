@@ -22,7 +22,7 @@ const LatestMenProducts = () => {
               <div className='grid grid-cols-2'>
                 <div className='flex'>
                   <p className="mt-1 me-3">$16.00</p>
-                  <p className="mt-1 font-light line-through">$20.00</p>
+                  <p className="mt-1 font-light line-through text-red-600">$20.00</p>
                 </div>
                 <div className='flex items-center justify-end cursor-pointer'>
                   <BsFillCartPlusFill />
