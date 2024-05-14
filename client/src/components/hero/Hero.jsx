@@ -2,8 +2,10 @@ import React from 'react'
 import HeroCourosel from './HeroCourosel';
 import M1 from '../../assets/image1.png';
 import Bannerx from './Banner';
+import { useSelector } from 'react-redux';
 
 const Hero = () => {
+  const {user} = useSelector(state=>state.reducer.auth)
   return (
     <section className='lg:px-[7rem] md:px-[5rem] px-2 md:mt-7'>
       <div className='grid lg:grid-cols-2 grid-cols-1'>
@@ -20,7 +22,7 @@ const Hero = () => {
         <HeroCourosel/>
       </div>
       </div>
-      <Bannerx/>
+      {user?null:<Bannerx/>}
     </section >
   )
 }

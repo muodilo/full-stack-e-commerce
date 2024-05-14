@@ -1,6 +1,7 @@
 import React from 'react'
 import { Banner, Button } from "flowbite-react";
 import { HiX } from "react-icons/hi";
+import { Link } from 'react-router-dom';
 
 const Bannerx = () => {
   return (
@@ -21,7 +22,7 @@ const Bannerx = () => {
           </p>
         </div>
         <div className="flex shrink-0 items-center">
-          <Button href="#">Sign up</Button>
+          <Link to="/sign-up" className='btn btn-primary'>Sign up</Link>
           <Banner.CollapseButton color="gray" className="border-0 bg-transparent text-gray-500 dark:text-gray-400">
             <HiX className="h-4 w-4" />
           </Banner.CollapseButton>
