@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { RiMenu5Line } from "react-icons/ri";
 import { CiLogin } from "react-icons/ci";
-import { useSelector } from 'react-redux';
+import { useSelector , useDispatch } from 'react-redux';
 import { Avatar, Dropdown } from "flowbite-react";
+import { logout } from "../../features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const {user} = useSelector(state=>state.reducer.auth)
+  const { user } = useSelector(state => state.reducer.auth);
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <section className='bg-blue-400 left-0 right-0 fixed z-30'>
       <div className='lg:px-[7rem] md:px-[5rem] px-2 py-2 grid md:grid-cols-4 grid-cols-1'>
@@ -39,7 +45,7 @@ const Navbar = () => {
       <Dropdown.Item>Settings</Dropdown.Item>
       <Dropdown.Item>Earnings</Dropdown.Item>
       <Dropdown.Divider />
-      <Dropdown.Item>Sign out</Dropdown.Item>
+      <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
     </Dropdown></div>):
         (<div className=''>
           <Link to='/sign-up' className='mt-3 flex text-xl btn'><CiLogin className='me-1'/> Login</Link>
@@ -99,7 +105,7 @@ const Navbar = () => {
       <Dropdown.Item>Settings</Dropdown.Item>
       <Dropdown.Item>Earnings</Dropdown.Item>
       <Dropdown.Divider />
-      <Dropdown.Item>Sign out</Dropdown.Item>
+      <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
     </Dropdown></div>):
         (<div className=' md:flex md:ms-40 lg:ms-auto hidden'>
           <Link to='/sign-up' className='flex btn items-center text-xl'><CiLogin className='me-1'/> Login</Link>
