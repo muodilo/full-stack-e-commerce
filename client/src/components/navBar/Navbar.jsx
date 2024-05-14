@@ -11,9 +11,14 @@ import { Spinner } from "flowbite-react";
 const Navbar = () => {
   const { user } = useSelector(state => state.reducer.auth);
   const dispatch = useDispatch();
+  
   const handleLogout = () => {
-    dispatch(logout());
-  };
+    const shouldLogout = window.confirm("Are you sure you want to logout?");
+    if (shouldLogout) {
+        dispatch(logout());
+    }
+};
+
   return (
     <section className='bg-blue-400 left-0 right-0 fixed z-30'>
       <div className='lg:px-[7rem] md:px-[5rem] px-2 py-2 grid md:grid-cols-4 grid-cols-1'>
