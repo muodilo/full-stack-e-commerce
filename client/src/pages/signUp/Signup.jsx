@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FloatingLabel } from 'flowbite-react';
 import { toast } from 'react-toastify';
-// import { register,resetUser } from '../../features/auth/authSlice';
+import { register,resetUser } from '../../features/auth/authSlice';
 import './signup.css';
 
 const Signup = () => {
@@ -20,20 +20,20 @@ const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const { user, isError, isSuccess, isLoading, message } = useSelector(state => state.reducer.auth);
+  const { user, isError, isSuccess, isLoading, message } = useSelector(state => state.reducer.auth);
 
-  // useEffect(() => {
-  //   if (isError) {
-  //     toast.error(message);
-  //   }
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
 
-  //   //redirect when logged in
-  //   if (isSuccess || user) {
-  //     navigate('/')
-  //   }
+    //redirect when logged in
+    if (isSuccess || user) {
+      navigate('/')
+    }
 
-  //   dispatch(resetUser());
-  // }, [isError, isSuccess, user, message, dispatch])
+    dispatch(resetUser());
+  }, [isError, isSuccess, user, message, dispatch])
 
   const onChange = (e) => {  
     setFormData((prev) => ({
@@ -47,24 +47,24 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // if (password !== password2) {
-    //   toast.error('password mismatch');
-    // } else {
-    //   const userData = {
-    //     username,
-    //     email,
-    //     password,
-    //   }
+    if (password !== password2) {
+      toast.error('password mismatch');
+    } else {
+      const userData = {
+        username,
+        email,
+        password,
+      }
 
-    //   try {
-    //     await dispatch(register(userData));
+      try {
+        await dispatch(register(userData));
         
-    //     // After successful registration, navigate to the login page
-    //     navigate('/login');
-    //   } catch (error) {
-    //     toast.error('Registration failed. Please try again.');
-    //   }
-    // }
+        // After successful registration, navigate to the login page
+        navigate('/');
+      } catch (error) {
+        toast.error('Registration failed. Please try again.');
+      }
+    }
   };
 
 
