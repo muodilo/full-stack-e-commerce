@@ -7,6 +7,7 @@ import SwapTheme from './components/SwapTheme/SwapTheme';
 import Footer from './components/Footer/Footer';
 import MenPage from './pages/menPage/MenPage';
 import Signup from './pages/signUp/Signup';
+import Login from './pages/Login/Login';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path='/' element={<Home/> } />
         <Route path='/men' element={<MenPage/> } />
         <Route path='/sign-up' element={<Signup/> } />
+        <Route path='/login' element={<Login/> } />
       </Routes>
       <Footer/>
       <ToastContainer/>

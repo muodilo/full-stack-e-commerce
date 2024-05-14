@@ -6,6 +6,7 @@ import { useSelector , useDispatch } from 'react-redux';
 import { Avatar, Dropdown } from "flowbite-react";
 import { logout } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import { Spinner } from "flowbite-react";
 
 const Navbar = () => {
   const { user } = useSelector(state => state.reducer.auth);
@@ -48,7 +49,7 @@ const Navbar = () => {
       <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
     </Dropdown></div>):
         (<div className=''>
-          <Link to='/sign-up' className='mt-3 flex text-xl btn'><CiLogin className='me-1'/> Login</Link>
+          <Link to='/login' className='mt-3 flex text-xl btn'><CiLogin className='me-1'/> Login</Link>
         </div>)}
           <li className='me-5  '>
             <Link to='/'>SHOP</Link>
@@ -108,7 +109,7 @@ const Navbar = () => {
       <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
     </Dropdown></div>):
         (<div className=' md:flex md:ms-40 lg:ms-auto hidden'>
-          <Link to='/sign-up' className='flex btn items-center text-xl'><CiLogin className='me-1'/> Login</Link>
+          <Link to='/login' className='flex btn items-center text-xl'><CiLogin className='me-1'/> Login</Link>
         </div>)}
         <div className='md:flex hidden'>
         <div className="relative  ms-auto">
