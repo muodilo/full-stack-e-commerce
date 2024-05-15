@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import productServices from "./productServices";
 
 const initialState = {
   men: [],
@@ -34,6 +35,16 @@ const initialState = {
   
 }
 
+export const getLatestMenProducts = createAsyncThunk('get/getLatestMenProducts', async (_, thunkAPI) => {
+  try {
+    return await productServices.getLatestMenProducts();
+  } catch (error) {
+    const latestMenMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+
+    return thunkAPI.rejectWithValue(latestMenMessage);
+  }
+})
+
 export const productSlice = createSlice({
   name: 'product',
   initialState,
@@ -66,7 +77,19 @@ export const productSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    .addCase()
+      .addCase(getLatestMenProducts.pending, (state) => {
+        state.lastestMenAreLoading = true;
+      })
+      .addCase(getLatestMenProducts.fulfilled, (state,action) => {
+        state.lastestMenAreLoading = false;
+        state.latestMenSuccess = true;
+        state.latestMen = action.payload;
+      })
+      .addCase(getLatestMenProducts.rejected, (state,action) => {
+        state.lastestMenAreLoading = false;
+        state.lastestMenError = true;
+        state.latestMenMessage = action.payload;
+      })
   }
 
 })
