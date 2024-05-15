@@ -63,6 +63,14 @@ export const productSlice = createSlice({
       state.kidsMessage='';
       state.latestKidsMessage='';
     }
+  },
+  extraReducers: (builder) => {
+    builder
+    .addCase()
   }
 
 })
+
+export const { resetProduct } = productSlice.actions;
+
+export default productSlice.reducer;
