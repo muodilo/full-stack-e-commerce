@@ -1,8 +1,8 @@
 import React,{useEffect} from 'react'
-import { BsFillCartPlusFill } from "react-icons/bs";
-import { BsFillCartCheckFill } from "react-icons/bs";
 import { getLatestMenProducts,resetProduct } from '../../features/products/productSlice';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import SkeletonCard from '../productCard/SkeletonCard';
+import ProductCard from '../productCard/ProductCard';
 
 const LatestMenProducts = () => {
 
@@ -26,9 +26,16 @@ const LatestMenProducts = () => {
       <div className='lg:px-[7rem] md:px-[5rem] px-2 pt-20'>
 
         <h1 className='text-center text-4xl font-bold mb-5'>Latest Men products</h1>
-        <hr />
+        <hr className='mb-3'/>
         <div className=' grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1'>
           
+          {lastestMenAreLoading && [1, 2, 3, 4].map((product, index) => (
+            <SkeletonCard key={index}/>
+          ))}
+
+          {(!lastestMenAreLoading && latestMenSuccess) && latestMen.map((product) => (
+            <ProductCard key={product._id} product={ product} />
+          ))}
 
 
 
