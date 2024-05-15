@@ -20,6 +20,7 @@ const getLatestWomenProducts = async () => {
 
 const productServices = {
   getLatestMenProducts,
+  getLatestWomenProducts,
 }
 
 export default productServices;

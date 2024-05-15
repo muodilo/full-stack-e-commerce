@@ -44,6 +44,15 @@ export const getLatestMenProducts = createAsyncThunk('get/getLatestMenProducts',
     return thunkAPI.rejectWithValue(latestMenMessage);
   }
 })
+export const getLatestWomenProducts = createAsyncThunk('get/getLatestWomenProducts', async (_, thunkAPI) => {
+  try {
+    return await productServices.getLatestWomenProducts();
+  } catch (error) {
+    const latestWomenMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+
+    return thunkAPI.rejectWithValue(latestWomenMessage);
+  }
+})
 
 export const productSlice = createSlice({
   name: 'product',
@@ -89,6 +98,19 @@ export const productSlice = createSlice({
         state.lastestMenAreLoading = false;
         state.lastestMenError = true;
         state.latestMenMessage = action.payload;
+      })
+      .addCase(getLatestWomenProducts.pending, (state) => {
+        state.lastestWomenAreLoading = true;
+      })
+      .addCase(getLatestWomenProducts.fulfilled, (state,action) => {
+        state.lastestWomenAreLoading = false;
+        state.latestWomenSuccess = true;
+        state.latestWomen = action.payload;
+      })
+      .addCase(getLatestWomenProducts.rejected, (state,action) => {
+        state.lastestWomenAreLoading = false;
+        state.lastestWomenError = true;
+        state.latestWomenMessage = action.payload;
       })
   }
 
