@@ -1,6 +1,26 @@
-import React from 'react'
+import React,{useEffect} from 'react'
+import { getLatestWomenProducts,resetProduct } from '../../features/products/productSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import SkeletonCard from '../productCard/SkeletonCard';
+import ProductCard from '../productCard/ProductCard';
 
 const LatestWomenProducts = () => {
+
+  const dispatch = useDispatch();
+  const { latestWomen, lastestWomenAreLoading, lastestWomenError, latestWomenSuccess, latestWomenMessage } = useSelector(state => state.reducer.product);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await dispatch(getLatestWomenProducts());
+        dispatch(resetProduct());
+      } catch (error) {
+        console.error(error);
+        dispatch(resetProduct());
+      }
+    }
+    fetchData();
+  },[dispatch])
   return (
     <section>
       <div className='lg:px-[7rem] md:px-[5rem] px-2 pt-20'>
@@ -9,50 +29,14 @@ const LatestWomenProducts = () => {
         <hr />
         <div className=' grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1'>
           
-          <div className=" p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://images.pexels.com/photos/1127000/pexels-photo-1127000.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">The Catalyzer</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-          
-          <div className=" p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://images.pexels.com/photos/1383869/pexels-photo-1383869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">The Catalyzer</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-          
-          <div className=" p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://images.pexels.com/photos/821413/pexels-photo-821413.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">The Catalyzer</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-          
-          <div className=" p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://images.pexels.com/photos/3555936/pexels-photo-3555936.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">The Catalyzer</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-          
+        {lastestWomenAreLoading && [1, 2, 3, 4].map((product, index) => (
+            <SkeletonCard key={index}/>
+          ))}
+
+          {(!lastestWomenAreLoading && latestWomenSuccess) && latestWomen.map((product) => (
+            <ProductCard key={product._id} product={ product} />
+          ))}
+
         </div>
         <div className='text-center'>
           <button className='btn btn-active animate-bounce'>Explore more</button>
