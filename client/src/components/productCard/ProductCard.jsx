@@ -15,7 +15,7 @@ const ProductCard = ({product}) => {
         <div className='grid grid-cols-2'>
           <div className='flex'>
               <p className="mt-1 me-3">Rwf { product.discountPrice}</p>
-              <p className="mt-1 font-light line-through text-red-600">{ product.price}</p>
+              <p className="mt-1 font-light line-through text-red-600">Rwf { product.price}</p>
           </div>
           <div className='flex items-center justify-end cursor-pointer'>
             <BsFillCartPlusFill />

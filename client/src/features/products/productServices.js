@@ -10,6 +10,14 @@ const getLatestMenProducts = async() => {
   return response.data;
 }
 
+//get latest women products
+
+const getLatestWomenProducts = async () => {
+  const response = await axios.get(`${BASE_API_URL}/products/currentWomenProducts`)
+
+  return response.data;
+}
+
 const productServices = {
   getLatestMenProducts,
 }
