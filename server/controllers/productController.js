@@ -190,6 +190,7 @@ const getAllKidsProducts = asyncHandler(async (req, res) => {
     throw new Error(error.message);
   }
 })
+
 const getAllFeaturedProducts = asyncHandler(async (req, res) => {
   try {
     const products = await Product.find({ isFeatured: 'true' }).sort({ createdAt: -1 })
