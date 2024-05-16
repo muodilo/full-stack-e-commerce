@@ -8,6 +8,11 @@ const initialState = {
   latestMen: [],
   latestWomen: [],
   latestKids: [],
+  featured: [],
+  featuredLoading:false,
+  featuredError:false,
+  featuredSuccess:false,
+  featuredMessage:'',
   menAreLoading: false,
   lastestMenAreLoading: false,
   womenAreLoading: false,
@@ -62,6 +67,15 @@ export const getLatestKidsProducts = createAsyncThunk('get/getLatestKidsProducts
     return thunkAPI.rejectWithValue(latestKidsMessage);
   }
 })
+export const getLatestFeaturedProducts = createAsyncThunk('get/getLatestFeaturedProducts', async (_, thunkAPI) => {
+  try {
+    return await productServices.getLatestFeaturedProducts();
+  } catch (error) {
+    const latestKidsMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+
+    return thunkAPI.rejectWithValue(latestKidsMessage);
+  }
+})
 
 export const productSlice = createSlice({
   name: 'product',
@@ -90,7 +104,12 @@ export const productSlice = createSlice({
       state.latestMenMessage='';
       state.womenMessage='';
       state.kidsMessage='';
-      state.latestKidsMessage='';
+      state.latestKidsMessage = '';
+      
+      state.featuredLoading=false;
+      state.featuredError=false;
+      // state.featuredSuccess=false;
+      state.featuredMessage='';
     }
   },
   extraReducers: (builder) => {
@@ -133,6 +152,20 @@ export const productSlice = createSlice({
         state.lastestKidsAreLoading = false;
         state.lastestKidsError = true;
         state.latestKidsMessage = action.payload;
+      })
+
+      .addCase(getLatestFeaturedProducts.pending, (state) => {
+        state.featuredLoading = true;
+      })
+      .addCase(getLatestFeaturedProducts.fulfilled, (state,action) => {
+        state.featuredLoading = false;
+        state.featuredSuccess = true;
+        state.featured = action.payload;
+      })
+      .addCase(getLatestFeaturedProducts.rejected, (state,action) => {
+        state.featuredLoading = false;
+        state.featuredError = true;
+        state.featuredMessage = action.payload;
       })
   }
 
