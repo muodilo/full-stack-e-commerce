@@ -24,10 +24,17 @@ const getLatestKidsProducts = async () => {
 
   return response.data;
 }
+//get latest featured products
+const getLatestFeaturedProducts = async () => {
+  const response = await axios.get(`${BASE_API_URL}/products/featured`)
+
+  return response.data;
+}
 const productServices = {
   getLatestMenProducts,
   getLatestWomenProducts,
-  getLatestKidsProducts
+  getLatestKidsProducts,
+  getLatestFeaturedProducts
 }
 
 export default productServices;

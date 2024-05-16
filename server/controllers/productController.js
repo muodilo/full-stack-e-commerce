@@ -193,7 +193,7 @@ const getAllKidsProducts = asyncHandler(async (req, res) => {
 
 const getAllFeaturedProducts = asyncHandler(async (req, res) => {
   try {
-    const products = await Product.find({ isFeatured: 'true' }).sort({ createdAt: -1 })
+    const products = await Product.find({ isFeatured: 'true' }).sort({ createdAt: -1 }).limit(4);
 
     if (!products || products.length === 0) {
       res.status(404).json('there is no product available');
