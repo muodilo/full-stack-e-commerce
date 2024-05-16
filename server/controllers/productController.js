@@ -190,6 +190,21 @@ const getAllKidsProducts = asyncHandler(async (req, res) => {
     throw new Error(error.message);
   }
 })
+const getAllFeaturedProducts = asyncHandler(async (req, res) => {
+  try {
+    const products = await Product.find({ isFeatured: 'true' }).sort({ createdAt: -1 })
+
+    if (!products || products.length === 0) {
+      res.status(404).json('there is no product available');
+    } else {
+      res.status(200).json(products);
+    }
+
+  } catch (error) {
+    res.status(500)
+    throw new Error(error.message);
+  }
+})
 
 module.exports = {
   createProduct,
@@ -201,6 +216,7 @@ module.exports = {
   getCurrentWomenProducts,
   getAllWomenProducts,
   getAllKidsProducts,
-  getCurrentKidsProducts
+  getCurrentKidsProducts,
+  getAllFeaturedProducts
 
 }
