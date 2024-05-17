@@ -13,11 +13,21 @@ const addToCart = async (id, token) => {
     const response = await axios.post(`${BASE_API_URL}/cart/${id}`, null, config);
     return response.data;
 };
+const getCart = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+    const response = await axios.post(`${BASE_API_URL}/cart/`, null, config);
+    return response.data;
+};
 
 
 
 const cartServices = {
   addToCart,
+  getCart
 }
 
 export default cartServices;
