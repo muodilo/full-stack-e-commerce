@@ -18,7 +18,7 @@ const addToCart = async (id,token) => {
 
 
 const cartServices = {
-
+  addToCart,
 }
 
 export default cartServices;

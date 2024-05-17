@@ -5,7 +5,7 @@ const User = require('../models/userModel.js');
 
 
 const addToCart = asyncHandler(async (req, res) => {
-  const { productId } = req.body;
+  const productId  = req.params.id;
   const userId = req.user._id; // Assuming you have user information in req.user
   
   try {
