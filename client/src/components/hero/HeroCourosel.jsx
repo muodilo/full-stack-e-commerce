@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Carousel } from "flowbite-react";
 import M2 from '../../assets/cloth1.webp'
 import M3 from '../../assets/cloth2.jpeg'
@@ -7,15 +8,23 @@ import M5 from '../../assets/cloth4.jpeg'
 
 
 const HeroCourosel = () => {
+
+  const { featured, featuredLoading, featuredError, featuredSuccess, featuredMessage } = useSelector(state => state.reducer.product);
+  
   return (
     <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
-    <Carousel pauseOnHover>
-      <img src={M2} alt="..." />
-      <img src={M3} alt="..." />
-      <img src={M4} alt="..." />
-      <img src={M5} alt="..." />
-    </Carousel>
-  </div>
+      {featuredLoading ? (
+        <Carousel className='skeleton h-56 sm:h-64 xl:h-80 2xl:h-96'>
+
+        </Carousel>
+      ) : (
+        <Carousel pauseOnHover>
+          {featured.map(product => (      
+            <img src={product.images[0]} key={product._id} alt="..." />
+          ))}
+        </Carousel>
+      )}
+    </div>
   )
 }
 
