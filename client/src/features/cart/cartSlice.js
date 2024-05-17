@@ -12,7 +12,8 @@ const initialState = {
 export const addToCart = createAsyncThunk('cart/addToCart', async (id,thunkAPI) => {
   try {
     const token = thunkAPI.getState().reducer.auth.user.token;
-    console.log(token)
+    console.log(token);
+    console.log(id);
     return await cartServices.addToCart(id,token);
   } catch (error) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();

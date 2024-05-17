@@ -1,31 +1,71 @@
-import React from 'react'
+import React, { useState } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { BsFillCartCheckFill } from "react-icons/bs";
+import { addToCart, resetCart } from '../../features/cart/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { Spinner } from "flowbite-react";
 
-const ProductCard = ({product}) => {
+const ProductCard = ({ product }) => {
+
+  const BASE_API_URL = import.meta.env.REACT_APP_API_URL;
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false); // State to track loading status for each product card
+
+  const { addToCartError, addToCartSuccess, addToCartMessage } = useSelector(state => state.reducer.cart);
+  
+  const handleAddToCart = async() => {
+    try {
+      const id = product._id;
+      setLoading(true); // Set loading to true when the add to cart process starts
+
+      const action = await dispatch(addToCart(id));
+
+      if (addToCart.fulfilled.match(action)) {
+        dispatch(resetCart());
+        toast.success(`${product.name} added successfully`);
+      } else {
+        toast.error('Error creating post:', action.error.message);
+        console.error('Error creating post:', action.error.message);  
+        dispatch(resetCart());
+      }
+    } catch (error) {
+      toast.error('Error creating post:', error.message);
+      console.error('Error creating post:', error.message);
+      dispatch(resetCart());
+    } finally {
+      setLoading(false); // Set loading to false when the add to cart process completes
+    }
+  }
+
   return (
     <div className='px-2'>
-    <div className=" p-4 w-full shadow hover:shadow-xl rounded-xl">
-      <a className="block relative h-48 rounded overflow-hidden">
-          <img alt="ecommerce" className="object-cover object-center w-full h-full block hover:scale-125 transition" src={ product.images[0]} />
-      </a>
-      <div className="mt-4">
-          <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">{ product.type}</h3>
-          <h2 className="text-gray-900 title-font text-lg font-medium">{product.name }</h2>
-        <div className='grid grid-cols-2'>
-          <div className='flex'>
-              <p className="mt-1 me-3">Rwf { product.discountPrice}</p>
-              <p className="mt-1 font-light line-through text-red-600">Rwf { product.price}</p>
+      <div className=" p-4 w-full shadow hover:shadow-xl rounded-xl">
+        <a className="block relative h-48 rounded overflow-hidden">
+            <img alt="ecommerce" className="object-cover object-center w-full h-full block hover:scale-125 transition" src={product.images[0]} />
+        </a>
+        <div className="mt-4">
+            <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">{product.type}</h3>
+            <h2 className="text-gray-900 title-font text-lg font-medium">{product.name}</h2>
+          <div className='grid grid-cols-2'>
+            <div className='flex'>
+                <p className="mt-1 me-3">Rwf {product.discountPrice}</p>
+                <p className="mt-1 font-light line-through text-red-600">Rwf {product.price}</p>
+            </div>
+            <div className='flex items-center justify-end cursor-pointer'>
+              {loading ? (
+                <Spinner aria-label="Small spinner example" size="sm" />
+              ) : (
+                <BsFillCartPlusFill onClick={handleAddToCart} />
+              )}
+            </div>
           </div>
-          <div className='flex items-center justify-end cursor-pointer'>
-            <BsFillCartPlusFill />
-          </div>
-
         </div>
       </div>
-    </div>
     </div>
   )
 }
 
-export default ProductCard
+export default ProductCard;
+
