@@ -1,28 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { BsFillCartCheckFill } from "react-icons/bs";
-import { addToCart, resetCart } from '../../features/cart/cartSlice';
+import { addToCart, getCart, resetCart } from '../../features/cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spinner } from "flowbite-react";
+import { useNavigate } from 'react-router-dom'; // Import useHistory from react-router-dom
 
 const ProductCard = ({ product }) => {
 
-  const BASE_API_URL = import.meta.env.REACT_APP_API_URL;
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false); // State to track loading status for each product card
+  const navigate = useNavigate(); // Get history object from react-router-dom
 
   const { addToCartError, addToCartSuccess, addToCartMessage } = useSelector(state => state.reducer.cart);
+  const { user } = useSelector(state => state.reducer.auth);
   
-  const handleAddToCart = async() => {
+  const handleAddToCart = async () => {
     try {
+      if (!user) {
+        // If user is not logged in, redirect to login page
+        navigate('/login');
+        return;
+      }
+
       const id = product._id;
       setLoading(true); // Set loading to true when the add to cart process starts
 
       const action = await dispatch(addToCart(id));
+      
 
       if (addToCart.fulfilled.match(action)) {
+        await dispatch(getCart());
         dispatch(resetCart());
         toast.success(`${product.name} added successfully`);
       } else {
@@ -68,4 +78,3 @@ const ProductCard = ({ product }) => {
 }
 
 export default ProductCard;
-
