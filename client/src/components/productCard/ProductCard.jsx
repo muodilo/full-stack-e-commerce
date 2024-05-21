@@ -36,13 +36,13 @@ const ProductCard = ({ product }) => {
         dispatch(resetCart());
         toast.success(`${product.name} added successfully`);
       } else {
-        toast.error('Error creating post:', action.error.message);
-        console.error('Error creating post:', action.error.message);  
+        toast.error('Add to cart failed:', action.error.message);
+        console.error('Add to cart failed:', action.error.message);  
         dispatch(resetCart());
       }
     } catch (error) {
-      toast.error('Error creating post:', error.message);
-      console.error('Error creating post:', error.message);
+      toast.error('Add to cart failed:', error.message);
+      console.error('Add to cart failed:', error.message);
       dispatch(resetCart());
     } finally {
       setLoading(false); // Set loading to false when the add to cart process completes

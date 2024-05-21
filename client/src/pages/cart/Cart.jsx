@@ -1,96 +1,86 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCart, addToCart, resetCart,removeFromCart } from '../../features/cart/cartSlice';
+import { getCart, addToCart, resetCart, removeFromCart } from '../../features/cart/cartSlice';
 import { useNavigate } from "react-router-dom";
-import { FaPlus } from "react-icons/fa6";
-import { FaMinus } from "react-icons/fa6";
+import { FaPlus, FaMinus } from "react-icons/fa6";
 import { CiSquareRemove } from "react-icons/ci";
 import { Spinner } from "flowbite-react";
 
-
 const Cart = () => {
-  const { cart, addToCartError, addToCartSuccess, addToCartMessage, getCartError,getCartLoading } = useSelector(state => state.reducer.cart);
+  const { cart, addToCartError, addToCartSuccess, addToCartMessage, getCartError, getCartLoading } = useSelector(state => state.reducer.cart);
   const { user } = useSelector(state => state.reducer.auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  
-  const handleIncreaseQuantity = async (id) => {
-    try {
-      if (!user) {
-        // If user is not logged in, redirect to login page
-        navigate('/login');
-        return;
-      }
-      
-      // Set loading state for the item to true
-      setLoading(prevState => ({ ...prevState, [id]: true }));
-      
-      const action = await dispatch(addToCart(id));
-      
-      if (addToCart.fulfilled.match(action)) {
-        await dispatch(getCart());
-        dispatch(resetCart());
-      } else {
-        console.error('Error creating post:', action.error.message);
-        dispatch(resetCart());
-      }
-    } catch (error) {
-      console.error('Error creating post:', error.message);
-      dispatch(resetCart());
-    } finally {
-      // Set loading state for the item to false
-      setLoading(prevState => ({ ...prevState, [id]: false }));
-    }
-  }
-  const handleRemove = async (id) => {
-    try {
-      if (!user) {
-        // If user is not logged in, redirect to login page
-        navigate('/login');
-        return;
-      }
-      
-      // Set loading state for the item to true
-      setLoading(prevState => ({ ...prevState, [id]: true }));
-      
-      const action = await dispatch(removeFromCart(id));
-      
-      if (removeFromCart.fulfilled.match(action)) {
-        // If the removeFromCart action was fulfilled successfully
-        await dispatch(getCart());
-        dispatch(resetCart());
-      } else {
-        // If there was an error with the removeFromCart action
-        console.error('Error removing item from cart:', action.error.message);
-        dispatch(resetCart());
-      }
-    } catch (error) {
-      // If there was an error in the try block
-      console.error('Error removing item from cart:', error.message);
-      dispatch(resetCart());
-    } finally {
-      // Set loading state for the item to false
-      setLoading(prevState => ({ ...prevState, [id]: false }));
-    }
-  }
-  
-  
+  const [loading, setLoading] = useState({});
 
   useEffect(() => {
-    // Check if user is not logged in or not authorized
     if (!user) {
-      // If not logged in or authorized, navigate to the home page
       navigate('/login');
     }
-    // Dispatch the getCart action here
     dispatch(getCart());
     dispatch(resetCart());
   }, [dispatch, navigate, user]);
 
-  // State to track loading status for each item
-  const [loading, setLoading] = useState({});
+  const handleIncreaseQuantity = async (id) => {
+    try {
+      if (!user) {
+        navigate('/login');
+        return;
+      }
+      setLoading(prevState => ({ ...prevState, [id]: true }));
+      const action = await dispatch(addToCart(id));
+      if (addToCart.fulfilled.match(action)) {
+        await dispatch(getCart());
+        dispatch(resetCart());
+      } else {
+        console.error('Error adding item to cart:', action.error.message);
+        dispatch(resetCart());
+      }
+    } catch (error) {
+      console.error('Error adding item to cart:', error.message);
+      dispatch(resetCart());
+    } finally {
+      setLoading(prevState => ({ ...prevState, [id]: false }));
+    }
+  }
+
+  const handleRemove = async (id) => {
+    try {
+      if (!user) {
+        navigate('/login');
+        return;
+      }
+      setLoading(prevState => ({ ...prevState, [id]: true }));
+      const action = await dispatch(removeFromCart(id));
+      if (removeFromCart.fulfilled.match(action)) {
+        await dispatch(getCart());
+        dispatch(resetCart());
+      } else {
+        console.error('Error removing item from cart:', action.error.message);
+        dispatch(resetCart());
+      }
+    } catch (error) {
+      console.error('Error removing item from cart:', error.message);
+      dispatch(resetCart());
+    } finally {
+      setLoading(prevState => ({ ...prevState, [id]: false }));
+    }
+  }
+
+  const getTotalPrice = () => {
+    let totalPrice = 0;
+    cart.cart.items.forEach(item => {
+      totalPrice += item.product.discountPrice * item.quantity;
+    });
+    return totalPrice;
+  }
+
+  const handleCheckout = () => {
+    // Redirect to checkout page
+    navigate('/checkout');
+  }
 
   return (
     <section className='lg:px-[7rem] md:px-[5rem] px-2 min-h-svh'>
@@ -100,7 +90,6 @@ const Cart = () => {
       {!getCartError ? (
         <div className="overflow-x-auto">
           <table className="table">
-            {/* head */}
             <thead>
               <tr>
                 <th className=''>Image</th>
@@ -128,7 +117,7 @@ const Cart = () => {
                         </h1>
                       </div>
                       <div>
-                        <FaMinus onClick={()=>handleRemove(item.product._id)} className='cursor-pointer' />
+                        <FaMinus onClick={() => handleRemove(item.product._id)} className='cursor-pointer' />
                       </div>
                     </div>
                   </td>
@@ -138,18 +127,25 @@ const Cart = () => {
                     <h1 className='text-xl text-green-500'>{item.product.discountPrice * item.quantity} Rwf</h1>
                   </td>
                   <td className=''>
-                    <CiSquareRemove onClick={()=>handleRemove(item.product._id)} className='text-4xl text-red-600 cursor-pointer' />
+                    <CiSquareRemove onClick={() => handleRemove(item.product._id)} className='text-4xl text-red-600 cursor-pointer' />
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+          <div className="text-right mt-4">
+            <h2 className="text-2xl font-bold">Total: {getTotalPrice()} Rwf</h2>
+            <button onClick={handleCheckout} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+              Checkout
+            </button>
+          </div>
         </div>
       ) : (
-        <h1>cart is empty</h1>
+        <h1>Cart is empty</h1>
       )}
     </section>
   )
 }
 
 export default Cart;
+

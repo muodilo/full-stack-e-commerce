@@ -22,10 +22,10 @@ const Navbar = () => {
 };
 
   return (
-    <section className='bg-blue-400 left-0 right-0 fixed z-30'>
-      <div className='lg:px-[7rem] md:px-[5rem] px-2 py-2 grid md:grid-cols-4 grid-cols-1'>
-        <div className='grid grid-cols-2'>
-          <Link to='/' className='lg:text-3xl text-xl font-bold text-white flex items-center'>E-SHOP</Link>
+    <section className='left-0 right-0 fixed z-30'>
+      <div className='lg:mx-[7rem] md:mx-[5rem] px-5 mx-2 py-2 grid md:grid-cols-4 grid-cols-1 bg-blue-400/90 shadow rounded-2xl mt-1'>
+        <div className='grid grid-cols-2 '>
+          <Link to='/' className='lg:text-3xl text-xl font-bold flex items-center text-green-900'>E-SHOP</Link>
           <div className='flex items-center md:hidden'>
 
           <Link to='/cart' className="relative  ms-auto md:hidden cursor-pointer">
