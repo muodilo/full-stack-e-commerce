@@ -13,6 +13,12 @@ const initialState = {
   addToCartSuccess: false,
   addToCartLoading: false,
   addToCartMessage: '',
+  
+  removeFromCartError: false,
+  removeFromCartSuccess: false,
+  removeFromCartLoading: false,
+  removeFromCartMessage: '',
+
 }
 
 //add to cart
@@ -22,6 +28,19 @@ export const addToCart = createAsyncThunk('cart/addToCart', async (id,thunkAPI) 
     console.log(token);
     console.log(id);
     return await cartServices.addToCart(id,token);
+  } catch (error) {
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+
+    return thunkAPI.rejectWithValue(message);
+  }
+})
+//add to cart
+export const removeFromCart = createAsyncThunk('cart/removeFromCart', async (id,thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().reducer.auth.user.token;
+    console.log(token);
+    console.log(id);
+    return await cartServices.removeFromCart(id,token);
   } catch (error) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
 
@@ -55,6 +74,10 @@ export const addToCartSlice = createSlice({
       state.getCartError = false;
       // state.addToCartSuccess = false;
       state.getCartMessage = '';
+
+      state.removeFromCartLoading = false;
+      state.removeFromCartMessage = '';
+      state.removeFromCartError = false;
     }
   },
   extraReducers: (builder) => {
@@ -70,6 +93,19 @@ export const addToCartSlice = createSlice({
       state.addToCartLoading = false
       state.addToCartError = true
       state.addToCartMessage = action.payload
+    })
+      
+    .addCase(removeFromCart.pending, (state) => {
+      state.removeFromCartLoading = true;
+    })
+    .addCase(removeFromCart.fulfilled, (state) => {
+      state.removeFromCartLoading = false
+      state.removeFromCartSuccess = true
+    })
+    .addCase(removeFromCart.rejected, (state,action) => {
+      state.removeFromCartLoading = false
+      state.removeFromCartError = true
+      state.removeFromCartMessage = action.payload
     })
       
     .addCase(getCart.pending, (state) => {
