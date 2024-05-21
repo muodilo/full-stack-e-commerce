@@ -8,6 +8,7 @@ import Footer from './components/Footer/Footer';
 import MenPage from './pages/menPage/MenPage';
 import Signup from './pages/signUp/Signup';
 import Login from './pages/Login/Login';
+import Cart from './pages/cart/Cart';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path='/men' element={<MenPage/> } />
         <Route path='/sign-up' element={<Signup/> } />
         <Route path='/login' element={<Login/> } />
+        <Route path='/cart' element={<Cart/> } />
       </Routes>
       <Footer/>
       <ToastContainer/>

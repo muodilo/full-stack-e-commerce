@@ -13,7 +13,7 @@ const Navbar = () => {
   const { user } = useSelector(state => state.reducer.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { cart, addToCartError, addToCartSuccess, addToCartMessage } = useSelector(state => state.reducer.cart);
+  const { cart, addToCartError, addToCartSuccess, addToCartMessage,getCartMessage,getCartLoading } = useSelector(state => state.reducer.cart);
   const handleLogout = () => {
     const shouldLogout = window.confirm("Are you sure you want to logout?");
     if (shouldLogout) {
@@ -28,14 +28,14 @@ const Navbar = () => {
           <Link to='/' className='lg:text-3xl text-xl font-bold text-white flex items-center'>E-SHOP</Link>
           <div className='flex items-center md:hidden'>
 
-          <div className="relative  ms-auto md:hidden">
+          <Link to='/cart' className="relative  ms-auto md:hidden cursor-pointer">
             <div className="t-0 absolute left-3">
-              <p className="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">{cart.numberOfItems }</p>
+              <p className="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">{(getCartLoading)?<Spinner/>:((user && (getCartMessage !== 'Cart not found'))?cart.numberOfItems:0)}</p>
             </div>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="file: mt-4 h-6 w-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
-            </div>
+            </Link>
             
             <div className="dropdown dropdown-bottom dropdown-end md:hidden block">
           <div tabIndex={0} role="button" className="  ms-5 mt-1 text-2xl"><RiMenu5Line /></div>
@@ -119,14 +119,14 @@ const Navbar = () => {
           <Link to='/login' className='flex btn items-center text-xl'><CiLogin className='me-1'/> Login</Link>
         </div>)}
         <div className='md:flex hidden'>
-        <div className="relative  ms-auto">
+        <Link to='/cart' className="relative  ms-auto cursor-pointer">
             <div className="t-0 absolute left-3">
-              <p className="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">{user?cart.numberOfItems:0}</p>
+              <p className="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">{(getCartLoading)?<Spinner/>:((user && (getCartMessage !== 'Cart not found'))?cart.numberOfItems:0)}</p>
             </div>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="file: mt-4 h-6 w-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
-          </div>
+          </Link>
         </div>
         </div>
       

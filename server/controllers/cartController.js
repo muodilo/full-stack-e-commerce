@@ -42,7 +42,7 @@ const addToCart = asyncHandler(async (req, res) => {
 });
 
 const removeFromCart = asyncHandler(async (req, res) => {
-  const { productId } = req.body;
+  const productId  = req.params.id;
   const userId = req.user._id; // Assuming you have user information in req.user
   
   try {
@@ -64,8 +64,13 @@ const removeFromCart = asyncHandler(async (req, res) => {
       return;
     }
     
-    // Remove the item from the cart's items array
-    cart.items.splice(index, 1);
+    // Decrease the quantity of the item by 1
+    cart.items[index].quantity -= 1;
+    
+    // If the quantity reaches 0, remove the item from the cart
+    if (cart.items[index].quantity <= 0) {
+      cart.items.splice(index, 1);
+    }
     
     // Save the updated cart
     await cart.save();
@@ -75,6 +80,7 @@ const removeFromCart = asyncHandler(async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
 
 
 

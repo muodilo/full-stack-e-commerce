@@ -83,7 +83,6 @@ export const addToCartSlice = createSlice({
     .addCase(getCart.rejected, (state,action) => {
       state.getCartLoading = false
       state.getCartError = true
-      state.cart ={}
       state.getCartMessage = action.payload
     })
       
