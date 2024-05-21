@@ -20,7 +20,7 @@ const removeFromCart = async (id, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-    const response = await axios.delete(`${BASE_API_URL}/cart/${id}`, null, config);
+    const response = await axios.delete(`${BASE_API_URL}/cart/${id}`, config);
     return response.data;
 };
 

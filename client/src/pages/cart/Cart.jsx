@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCart, addToCart, resetCart } from '../../features/cart/cartSlice';
+import { getCart, addToCart, resetCart,removeFromCart } from '../../features/cart/cartSlice';
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
@@ -15,6 +15,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  
   const handleIncreaseQuantity = async (id) => {
     try {
       if (!user) {
@@ -22,12 +23,12 @@ const Cart = () => {
         navigate('/login');
         return;
       }
-
+      
       // Set loading state for the item to true
       setLoading(prevState => ({ ...prevState, [id]: true }));
-
+      
       const action = await dispatch(addToCart(id));
-
+      
       if (addToCart.fulfilled.match(action)) {
         await dispatch(getCart());
         dispatch(resetCart());
@@ -43,6 +44,39 @@ const Cart = () => {
       setLoading(prevState => ({ ...prevState, [id]: false }));
     }
   }
+  const handleRemove = async (id) => {
+    try {
+      if (!user) {
+        // If user is not logged in, redirect to login page
+        navigate('/login');
+        return;
+      }
+      
+      // Set loading state for the item to true
+      setLoading(prevState => ({ ...prevState, [id]: true }));
+      
+      const action = await dispatch(removeFromCart(id));
+      
+      if (removeFromCart.fulfilled.match(action)) {
+        // If the removeFromCart action was fulfilled successfully
+        await dispatch(getCart());
+        dispatch(resetCart());
+      } else {
+        // If there was an error with the removeFromCart action
+        console.error('Error removing item from cart:', action.error.message);
+        dispatch(resetCart());
+      }
+    } catch (error) {
+      // If there was an error in the try block
+      console.error('Error removing item from cart:', error.message);
+      dispatch(resetCart());
+    } finally {
+      // Set loading state for the item to false
+      setLoading(prevState => ({ ...prevState, [id]: false }));
+    }
+  }
+  
+  
 
   useEffect(() => {
     // Check if user is not logged in or not authorized
@@ -94,7 +128,7 @@ const Cart = () => {
                         </h1>
                       </div>
                       <div>
-                        <FaMinus className='cursor-pointer' />
+                        <FaMinus onClick={()=>handleRemove(item.product._id)} className='cursor-pointer' />
                       </div>
                     </div>
                   </td>
@@ -104,7 +138,7 @@ const Cart = () => {
                     <h1 className='text-xl text-green-500'>{item.product.discountPrice * item.quantity} Rwf</h1>
                   </td>
                   <td className=''>
-                    <CiSquareRemove className='text-4xl text-red-600 cursor-pointer' />
+                    <CiSquareRemove onClick={()=>handleRemove(item.product._id)} className='text-4xl text-red-600 cursor-pointer' />
                   </td>
                 </tr>
               ))}
