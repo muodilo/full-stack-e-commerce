@@ -9,6 +9,7 @@ import MenPage from './pages/menPage/MenPage';
 import Signup from './pages/signUp/Signup';
 import Login from './pages/Login/Login';
 import Cart from './pages/cart/Cart';
+import PlaceOrder from './pages/order/PlaceOrder';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path='/sign-up' element={<Signup/> } />
         <Route path='/login' element={<Login/> } />
         <Route path='/cart' element={<Cart/> } />
+        <Route path='/checkout' element={<PlaceOrder/> } />
       </Routes>
       <Footer/>
       <ToastContainer/>

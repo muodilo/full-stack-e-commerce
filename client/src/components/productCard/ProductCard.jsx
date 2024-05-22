@@ -60,7 +60,7 @@ const ProductCard = ({ product }) => {
             <h2 className="text-gray-900 title-font text-lg font-medium">{product.name}</h2>
           <div className='grid grid-cols-2'>
             <div className='flex'>
-                <p className="mt-1 me-3">Rwf {product.discountPrice}</p>
+                <p className="mt-1 me-3 text-green-500">Rwf {product.discountPrice}</p>
                 <p className="mt-1 font-light line-through text-red-600">Rwf {product.price}</p>
             </div>
             <div className='flex items-center justify-end cursor-pointer'>
