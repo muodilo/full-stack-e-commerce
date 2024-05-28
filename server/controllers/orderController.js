@@ -47,6 +47,28 @@ const createOrder = asyncHandler(async (req, res) => {
   }
 });
 
+const getUserOrders = asyncHandler(async (req, res) => {
+  const userId = req.user._id; 
+
+  try {
+    const orders = await Order.find({ user: userId })
+      .populate('user', 'name email')
+      .populate({
+        path: 'items.product',
+        select: 'name' 
+      });
+
+    res.status(200).json({ orders });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = {
-  createOrder
+  getUserOrders
+};
+
+module.exports = {
+  createOrder,
+  getUserOrders
 };
