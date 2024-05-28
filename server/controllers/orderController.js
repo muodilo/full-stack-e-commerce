@@ -17,7 +17,7 @@ const createOrder = asyncHandler(async (req, res) => {
     // Calculate total amount
     let totalAmount = 0;
     for (const item of cart.items) {
-      totalAmount += item.product.price * item.quantity;
+      totalAmount += item.product.discountPrice * item.quantity;
     }
 
     // Create the order
@@ -26,7 +26,7 @@ const createOrder = asyncHandler(async (req, res) => {
       items: cart.items.map(item => ({
         product: item.product._id,
         quantity: item.quantity,
-        price: item.product.price
+        price: item.product.discountPrice
       })),
       totalAmount,
       shippingAddress,
