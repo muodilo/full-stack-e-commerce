@@ -13,6 +13,17 @@ const placeOrder = async (orderData,token) => {
   return response.data;
 };
 
+const getUserOrders = async (token) => {
+  
+    const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.get(`${BASE_API_URL}/order`,config);
+  return response.data;
+};
+
 
 
 
@@ -20,6 +31,7 @@ const placeOrder = async (orderData,token) => {
 
 const orderService = {
   placeOrder,
+  getUserOrders
 
 }
 

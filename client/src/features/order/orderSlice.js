@@ -3,6 +3,12 @@ import orderService from "./orderServices";
 
 const initialState = {
   orders: [],
+
+  getUserOrdersLoading: false,
+  getUserOrdersError: false,
+  getUserOrdersErrorMessage: '',
+  getUserOrdersSuccess: false,
+  
   placeOrderLoading: false,
   placeOrderError: false,
   placeOrderErrorMessage: '',
@@ -23,6 +29,17 @@ export const placeOrder = createAsyncThunk('order/placeOrder', async (orderData,
     return thunkAPI.rejectWithValue(message);
   }
 })
+export const getUserOrders = createAsyncThunk('order/getUserOrders', async (_,thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().reducer.auth.user.token;
+    console.log(token);
+    return await orderService.getUserOrders(token);
+  } catch (error) {
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+
+    return thunkAPI.rejectWithValue(message);
+  }
+})
 
 
 
@@ -35,6 +52,11 @@ export const placeOrderSlice = createSlice({
       state.placeOrderLoading= false;
       state.placeOrderError= false;
       state.placeOrderErrorMessage = '';
+
+      state.getUserOrdersLoading = false;
+      state.getUserOrdersError = false;
+      state.getUserOrdersErrorMessage = '';
+      
 
     }
   },
@@ -51,6 +73,20 @@ export const placeOrderSlice = createSlice({
       state.placeOrderLoading = false
       state.placeOrderError = true
       state.placeOrderErrorMessage = action.payload
+    })
+      
+    .addCase(getUserOrders.pending, (state) => {
+      state.getUserOrdersLoading = true;
+    })
+    .addCase(getUserOrders.fulfilled, (state,action) => {
+      state.getUserOrdersLoading = false
+      state.placeOrderSuccess = true
+      state.orders = action.payload
+    })
+    .addCase(getUserOrders.rejected, (state,action) => {
+      state.getUserOrdersLoading = false
+      state.getUserOrdersError = true
+      state.getUserOrdersErrorMessage = action.payload
     })
   }
 })
