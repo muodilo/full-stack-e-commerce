@@ -2,13 +2,19 @@ import React,{useEffect} from 'react'
 import { getUserOrders,resetOrder } from '../../features/order/orderSlice'
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Badge } from "flowbite-react";
+import SkeletonRow from './OrderTableRow/SkeletonRow';
+import OrderTaleRow from './OrderTableRow/OrderTaleRow';
+
 
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.reducer.auth);
-  const { orders, getUserOrdersLoading, getUserOrdersErrorMessage } =
-		useSelector((state) => state.reducer.order);
+  const {
+		orders,
+		getUserOrdersLoading,
+		getUserOrdersErrorMessage,
+		getUserOrdersSuccess,
+	} = useSelector((state) => state.reducer.order);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -34,7 +40,6 @@ const Dashboard = () => {
 				<table className='table table-md'>
 					<thead>
 						<tr>
-							<th></th>
 							<th>Order ID</th>
 							<th>Date</th>
 							<th>Order Details</th>
@@ -43,16 +48,11 @@ const Dashboard = () => {
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th>1</th>
-							<td>id</td>
-							<td>12/5/2023</td>
-							<td className='text-blue-500 underline'>View Order Details</td>
-							<td>5000000 Rwf</td>
-							<td>
-								<Badge color='failure' className='inline'>pending</Badge>
-							</td>
-						</tr>
+						{getUserOrdersLoading &&
+							[1, 2, 3, 4, 5].map((item, index) => <SkeletonRow key={index} />)}
+            {(!getUserOrdersLoading && getUserOrdersSuccess) && orders.orders.map((order) => (
+              <OrderTaleRow key={order._id} order={order} />
+            ))} 
 					</tbody>
 				</table>
 			</div>

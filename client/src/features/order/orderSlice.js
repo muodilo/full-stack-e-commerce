@@ -80,7 +80,7 @@ export const placeOrderSlice = createSlice({
     })
     .addCase(getUserOrders.fulfilled, (state,action) => {
       state.getUserOrdersLoading = false
-      state.placeOrderSuccess = true
+      state.getUserOrdersSuccess = true
       state.orders = action.payload
     })
     .addCase(getUserOrders.rejected, (state,action) => {
