@@ -30,7 +30,7 @@ dispatch(logout());
 
 return (
 	<section className='left-0 right-0 fixed z-30'>
-		<div className='lg:mx-[7rem] md:mx-[5rem] px-5 mx-2 py-2 grid md:grid-cols-4 grid-cols-1 bg-blue-400/90 shadow rounded-2xl mt-1'>
+		<div className='lg:mx-[7rem] md:mx-[5rem] px-5 mx-2 py-2 grid md:grid-cols-4 grid-cols-1  bg-blue-400/90 shadow rounded-2xl mt-1'>
 			<div className='grid grid-cols-2 '>
 				<Link
 					to='/'
