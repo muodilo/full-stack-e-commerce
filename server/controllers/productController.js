@@ -233,6 +233,7 @@ module.exports = {
   getAllWomenProducts,
   getAllKidsProducts,
   getCurrentKidsProducts,
-  getAllFeaturedProducts
+  getAllFeaturedProducts,
+  getSpecificProduct
 
 }

@@ -10,7 +10,8 @@ const {
   getAllWomenProducts,
   getAllKidsProducts,
   getCurrentKidsProducts,
-  getAllFeaturedProducts
+  getAllFeaturedProducts,
+  getSpecificProduct
 } = require('../controllers/productController.js');
 const protect = require('../middleware/authMiddleware.js');
 const checkAdmin  = require('../middleware/adminMiddleware.js');
@@ -28,6 +29,8 @@ router.get('/women', getAllWomenProducts);
 router.get('/currentKidsProducts', getCurrentKidsProducts);
 router.get('/kids', getAllKidsProducts);
 router.get('/featured', getAllFeaturedProducts);
+router.get('/:id', getSpecificProduct);
+
 
 
 module.exports = router;
