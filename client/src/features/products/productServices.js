@@ -30,6 +30,11 @@ const getLatestFeaturedProducts = async () => {
 
   return response.data;
 }
+
+const getSpecificProduct = async (id) => {
+  const response = await axios.get(`${BASE_API_URL}/products/${id}`);
+  return response.data;
+}
 const productServices = {
   getLatestMenProducts,
   getLatestWomenProducts,
