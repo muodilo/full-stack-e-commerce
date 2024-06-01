@@ -11,6 +11,7 @@ import Login from './pages/Login/Login';
 import Cart from './pages/cart/Cart';
 import PlaceOrder from './pages/order/PlaceOrder';
 import Dashboard from './pages/dashboard/Dashboard';
+import ProductDetails from './pages/productDetails/ProductDetails';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/cart' element={<Cart/> } />
         <Route path='/checkout' element={<PlaceOrder/> } />
         <Route path='/dashboard' element={<Dashboard/> } />
+        <Route path='/products/:id' element={<ProductDetails/> } />
       </Routes>
       <Footer/>
       <ToastContainer/>

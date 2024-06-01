@@ -50,6 +50,10 @@ const ProductCard = ({ product }) => {
 		(item) => item.product._id === product._id
 	);
 
+	const handleClick = () => {
+		navigate(`/products/${product._id}`);
+	}
+
   return (
 		<div className='px-2'>
 			<div className='p-4 w-full shadow hover:shadow-xl rounded-xl'>
@@ -58,6 +62,7 @@ const ProductCard = ({ product }) => {
 						alt='ecommerce'
 						className='object-cover object-center w-full h-full block hover:scale-125 transition'
 						src={product.images[0]}
+						onClick={handleClick}
 					/>
 				</a>
 				<div className='mt-4'>
