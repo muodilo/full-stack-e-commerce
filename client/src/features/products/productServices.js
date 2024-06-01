@@ -39,7 +39,8 @@ const productServices = {
   getLatestMenProducts,
   getLatestWomenProducts,
   getLatestKidsProducts,
-  getLatestFeaturedProducts
+  getLatestFeaturedProducts,
+  getSpecificProduct
 }
 
 export default productServices;

@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import productServices from "./productServices";
 
 const initialState = {
+  specificProduct: {},
   men: [],
   women: [],
   kids: [],
@@ -9,10 +10,18 @@ const initialState = {
   latestWomen: [],
   latestKids: [],
   featured: [],
+
   featuredLoading:false,
   featuredError:false,
   featuredSuccess:false,
-  featuredMessage:'',
+  featuredMessage: '',
+  
+  specificProductLoading:false,
+  specificProductError:false,
+  specificProductSuccess:false,
+  specificProductMessage: '',
+  
+
   menAreLoading: false,
   lastestMenAreLoading: false,
   womenAreLoading: false,
@@ -77,6 +86,16 @@ export const getLatestFeaturedProducts = createAsyncThunk('get/getLatestFeatured
   }
 })
 
+export const getSpecificProduct = createAsyncThunk('get/getSpecificProduct', async (id, thunkAPI) => {
+  try {
+    return await productServices.getSpecificProduct(id);
+  } catch (error) {
+    const latestKidsMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+
+    return thunkAPI.rejectWithValue(latestKidsMessage);
+  }
+})
+
 export const productSlice = createSlice({
   name: 'product',
   initialState,
@@ -109,7 +128,12 @@ export const productSlice = createSlice({
       state.featuredLoading=false;
       state.featuredError=false;
       // state.featuredSuccess=false;
-      state.featuredMessage='';
+      state.featuredMessage = '';
+      
+      state.specificProductLoading=false;
+      state.specificProductError=false;
+      // state.featuredSuccess=false;
+      state.specificProductMessage='';
     }
   },
   extraReducers: (builder) => {
@@ -166,6 +190,21 @@ export const productSlice = createSlice({
         state.featuredLoading = false;
         state.featuredError = true;
         state.featuredMessage = action.payload;
+      })
+
+
+      .addCase(getSpecificProduct.pending, (state) => {
+        state.specificProductLoading = true;
+      })
+      .addCase(getSpecificProduct.fulfilled, (state,action) => {
+        state.specificProductLoading = false;
+        state.specificProductSuccess = true;
+        state.specificProduct = action.payload;
+      })
+      .addCase(getSpecificProduct.rejected, (state,action) => {
+        state.specificProductLoading = false;
+        state.specificProductError = true;
+        state.specificProductMessage = action.payload;
       })
   }
 
