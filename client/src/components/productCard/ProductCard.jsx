@@ -5,6 +5,7 @@ import { BsFillCartPlusFill, BsFillCartCheckFill } from "react-icons/bs";
 import { Spinner } from "flowbite-react";
 import { toast } from 'react-toastify';
 import { addToCart, getCart, resetCart } from '../../features/cart/cartSlice';
+import { getSpecificProduct ,resetProduct} from '../../features/products/productSlice';
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -12,7 +13,10 @@ const ProductCard = ({ product }) => {
   const [loading, setLoading] = useState(false);
 
   const { addToCartError, addToCartSuccess, addToCartMessage, cart } = useSelector(state => state.reducer.cart);
-  const { user } = useSelector(state => state.reducer.auth);
+	const { user } = useSelector(state => state.reducer.auth);
+	const { specificProductMessage } = useSelector(
+		(state) => state.reducer.product
+	);
 
   useEffect(() => {
     if (user) {
@@ -50,9 +54,20 @@ const ProductCard = ({ product }) => {
 		(item) => item.product._id === product._id
 	);
 
-	const handleClick = () => {
-		navigate(`/products/${product._id}`);
-	}
+  const handleClick = () => {
+		const fetchSingleProduct = async () => {
+			try {
+				await dispatch(getSpecificProduct(product._id));
+				navigate("/products/" + product._id);
+				window.scrollTo(0, 0);
+				dispatch(resetProduct());
+			} catch (error) {
+				toast.error(specificProductMessage);
+			}
+		};
+		fetchSingleProduct();
+		dispatch(resetProduct());
+	};
 
   return (
 		<div className='px-2'>
