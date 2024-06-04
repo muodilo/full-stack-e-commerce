@@ -5,7 +5,8 @@ import { BsFillCartPlusFill, BsFillCartCheckFill } from "react-icons/bs";
 import { Spinner } from "flowbite-react";
 import { toast } from 'react-toastify';
 import { addToCart, getCart, resetCart } from '../../features/cart/cartSlice';
-import { getSpecificProduct ,resetProduct} from '../../features/products/productSlice';
+import { getSpecificProduct, resetProduct } from '../../features/products/productSlice';
+
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -55,18 +56,7 @@ const ProductCard = ({ product }) => {
 	);
 
   const handleClick = () => {
-		const fetchSingleProduct = async () => {
-			try {
-				await dispatch(getSpecificProduct(product._id));
-				navigate("/products/" + product._id);
-				window.scrollTo(0, 0);
-				dispatch(resetProduct());
-			} catch (error) {
-				toast.error(specificProductMessage);
-			}
-		};
-		fetchSingleProduct();
-		dispatch(resetProduct());
+			navigate("/products/" + product._id);
 	};
 
   return (

@@ -31,6 +31,7 @@ const Cart = () => {
 		if (!user) {
 			navigate("/login");
 		}
+		window.scrollTo(0, 0);
 		dispatch(getCart());
 		dispatch(resetCart());
 	}, [dispatch, navigate, user]);
