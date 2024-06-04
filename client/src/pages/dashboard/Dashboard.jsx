@@ -40,8 +40,8 @@ const Dashboard = () => {
 				<table className='table table-md'>
 					<thead>
 						<tr>
-							<th>Order ID</th>
 							<th>Date</th>
+							<th>Order ID</th>
 							<th>Order Details</th>
 							<th>Amount</th>
 							<th>Status</th>

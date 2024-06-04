@@ -56,7 +56,7 @@ const getUserOrders = asyncHandler(async (req, res) => {
       .populate({
         path: 'items.product',
         select: 'name' 
-      });
+      }).sort({ createdAt: -1 });
 
     res.status(200).json({ orders });
   } catch (error) {

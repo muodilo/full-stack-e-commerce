@@ -12,8 +12,8 @@ const OrderTaleRow = ({ order }) => {
     const [openModal, setOpenModal] = useState(false);
   return (
 		<tr>
-			<td>{order._id}</td>
 			<td>{formatDate(order.createdAt)}</td>
+			<td>{order._id}</td>
 			<td className='text-blue-500 underline cursor-pointer'>
 				<h1 onClick={() => setOpenModal(true)}>View Order Details</h1>
 				<Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
