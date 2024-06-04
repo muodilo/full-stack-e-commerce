@@ -60,7 +60,7 @@ const ProductCard = ({ product }) => {
 	};
 
   return (
-		<div className='px-2'>
+		<div className=''>
 			<div className='p-4 w-full shadow hover:shadow-xl rounded-xl'>
 				<a className='block relative h-48 rounded overflow-hidden'>
 					<img

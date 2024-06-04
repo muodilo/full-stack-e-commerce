@@ -96,6 +96,16 @@ export const getSpecificProduct = createAsyncThunk('get/getSpecificProduct', asy
   }
 })
 
+export const getAllMenProducts = createAsyncThunk('get/getAllMenProducts', async (_, thunkAPI) => {
+  try {
+    return await productServices.getAllMenProducts();
+  } catch (error) {
+    const latestMenMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+
+    return thunkAPI.rejectWithValue(latestMenMessage);
+  }
+})
+
 export const productSlice = createSlice({
   name: 'product',
   initialState,
@@ -205,6 +215,21 @@ export const productSlice = createSlice({
         state.specificProductLoading = false;
         state.specificProductError = true;
         state.specificProductMessage = action.payload;
+      })
+
+
+      .addCase(getAllMenProducts.pending, (state) => {
+        state.menAreLoading = true;
+      })
+      .addCase(getAllMenProducts.fulfilled, (state,action) => {
+        state.menAreLoading = false;
+        state.menSuccess = true;
+        state.men = action.payload;
+      })
+      .addCase(getAllMenProducts.rejected, (state,action) => {
+        state.menAreLoading = false;
+        state.menError = true;
+        state.menMessage = action.payload;
       })
   }
 

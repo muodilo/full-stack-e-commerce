@@ -35,12 +35,20 @@ const getSpecificProduct = async (id) => {
   const response = await axios.get(`${BASE_API_URL}/products/${id}`);
   return response.data;
 }
+
+const getAllMenProducts = async () => {
+    const response = await axios.get(`${BASE_API_URL}/products/men`);
+
+  return response.data;
+}
+
 const productServices = {
   getLatestMenProducts,
   getLatestWomenProducts,
   getLatestKidsProducts,
   getLatestFeaturedProducts,
-  getSpecificProduct
+  getSpecificProduct,
+  getAllMenProducts,
 }
 
 export default productServices;

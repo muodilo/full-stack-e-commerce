@@ -27,7 +27,7 @@ const FeauturedProducts = () => {
 
         <h1 className='text-center text-4xl font-bold mb-5'>Featured products</h1>
         <hr />
-        <div className=' grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1'>
+        <div className=' grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3'>
           
         {featuredLoading && [1, 2, 3, 4].map((product, index) => (
             <SkeletonCard key={index}/>

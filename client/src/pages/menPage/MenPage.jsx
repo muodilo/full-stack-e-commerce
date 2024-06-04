@@ -1,9 +1,33 @@
-import React from 'react'
-import MenF1 from '../../assets/menFashion.png'
-import SkeletonCard from '../../components/productCard/SkeletonCard';
+import React, { useEffect } from "react";
+import MenF1 from "../../assets/menFashion.png";
+import SkeletonCard from "../../components/productCard/SkeletonCard";
+import { useDispatch, useSelector } from "react-redux";
+import { resetProduct, getAllMenProducts } from "../../features/products/productSlice";
+import ProductCard from "../../components/productCard/ProductCard";
 
 const MenPage = () => {
-  return (
+    const dispatch = useDispatch();
+		const {
+			men,
+			menAreLoading,
+			menError,
+			menSuccess,
+			menMessage,
+		} = useSelector((state) => state.reducer.product);
+
+		useEffect(() => {
+			const fetchData = async () => {
+				try {
+					await dispatch(getAllMenProducts());
+					dispatch(resetProduct());
+				} catch (error) {
+					console.error(error);
+					dispatch(resetProduct());
+				}
+			};
+			fetchData();
+		}, [dispatch]);
+	return (
 		<section className='lg:px-[7rem] md:px-[5rem] px-2'>
 			<div className=' border rounded-xl mt-5 grid  md:grid-cols-3 grid-cols-2 bg-blue-100 shadow'>
 				<div className=''>
@@ -23,7 +47,11 @@ const MenPage = () => {
 			</div>
 			<div className='border mt-10 flex items-center justify-center px-5 rounded-2xl py-3'>
 				<label className='input input-bordered flex items-center gap-2'>
-					<input type='text' className='grow border-none ' placeholder='Search' />
+					<input
+						type='text'
+						className='grow border-none'
+						placeholder='Search'
+					/>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
 						viewBox='0 0 16 16'
@@ -37,13 +65,18 @@ const MenPage = () => {
 					</svg>
 				</label>
 			</div>
-			<div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 '>
-				{[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
-					<SkeletonCard key={index} />
-				))}
+			<div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3'>
+				{menAreLoading &&
+					[1, 2, 3, 4].map((product, index) => <SkeletonCard key={index} />)}
+
+				{!menAreLoading &&
+					menSuccess &&
+					men.map((product) => (
+						<ProductCard key={product._id} product={product} />
+					))}
 			</div>
 		</section>
 	);
-}
+};
 
-export default MenPage
+export default MenPage;

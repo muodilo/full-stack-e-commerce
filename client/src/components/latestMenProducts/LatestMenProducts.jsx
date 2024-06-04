@@ -22,31 +22,30 @@ const LatestMenProducts = () => {
     fetchData();
   },[dispatch])
   return (
-    <section>
-      <div className='lg:px-[7rem] md:px-[5rem] px-2 pt-20'>
+		<section>
+			<div className='lg:px-[7rem] md:px-[5rem] px-2 pt-20'>
+				<h1 className='text-center text-4xl font-bold mb-5'>
+					Latest Men products
+				</h1>
+				<hr className='mb-3' />
+				<div className=' grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3'>
+					{lastestMenAreLoading &&
+						[1, 2, 3, 4].map((product, index) => <SkeletonCard key={index} />)}
 
-        <h1 className='text-center text-4xl font-bold mb-5'>Latest Men products</h1>
-        <hr className='mb-3'/>
-        <div className=' grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1'>
-          
-          {lastestMenAreLoading && [1, 2, 3, 4].map((product, index) => (
-            <SkeletonCard key={index}/>
-          ))}
-
-          {(!lastestMenAreLoading && latestMenSuccess) && latestMen.map((product) => (
-            <ProductCard key={product._id} product={ product} />
-          ))}
-
-
-
-          
-        </div>
-        <div className='text-center'>
-          <button className='btn btn-active animate-bounce'>Explore more</button>
-        </div>
-      </div>
-    </section>
-  )
+					{!lastestMenAreLoading &&
+						latestMenSuccess &&
+						latestMen.map((product) => (
+							<ProductCard key={product._id} product={product} />
+						))}
+				</div>
+				<div className='text-center'>
+					<button className='btn btn-active animate-bounce'>
+						Explore more
+					</button>
+				</div>
+			</div>
+		</section>
+	);
 }
 
 export default LatestMenProducts
