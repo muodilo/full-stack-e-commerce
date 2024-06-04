@@ -142,19 +142,19 @@ return (
 						</Link>
 					</li>
 					<li className='me-4'>
-						<a href='' className='block  hover:text-black lg:text-xl'>
-							WOMAN
-						</a>
+						<Link to='/women' className='block  hover:text-black lg:text-xl'>
+							WOMEN
+						</Link>
 					</li>
 					<li className='me-4'>
-						<a href='' className='block  hover:text-black lg:text-xl'>
+						<Link to='/kids' className='block  hover:text-black lg:text-xl'>
 							KIDS
-						</a>
+						</Link>
 					</li>
 					<li className='me-4'>
-						<a href='' className='block  hover:text-black lg:text-xl'>
+						<Link to='/contact' className='block  hover:text-black lg:text-xl'>
 							CONTACT
-						</a>
+						</Link>
 					</li>
 				</ul>
 			</div>
