@@ -28,7 +28,7 @@ const Hero = () => {
 						className='p-5 shadow rounded-3xl md:flex hidden '
 					/>
 				</div>
-				<div className='mt-5'>
+        <div className='mt-5'>
 					<HeroCourosel />
 				</div>
 			</div>

@@ -9,6 +9,9 @@ import { getCart } from '../../features/cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Home = () => {
+    useEffect(() => {
+			window.scrollTo(0, 0);
+		}, []);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,7 +23,7 @@ const Home = () => {
   return (
     <section>
       <Hero />
-      <FeauturedProducts />
+      {/* <FeauturedProducts /> */}
       <LatestMenProducts />
       <LatestWomenProducts />
       <LatestKidsProducts/>

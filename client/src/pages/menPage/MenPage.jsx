@@ -9,6 +9,9 @@ import {
 import ProductCard from "../../components/productCard/ProductCard";
 
 const MenPage = () => {
+	useEffect(() => {
+			window.scrollTo(0, 0);
+		}, []);
 	const dispatch = useDispatch();
 	const { men, menAreLoading, menError, menSuccess, menMessage } = useSelector(
 		(state) => state.reducer.product

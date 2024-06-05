@@ -10,6 +10,9 @@ import { Spinner } from "flowbite-react";
 import { getCart, resetCart } from "../../features/cart/cartSlice";
 
 const Navbar = () => {
+	const { user } = useSelector((state) => state.reducer.auth);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 const [activeNav, setActiveNav] = useState(
 			localStorage.getItem("activeNav") || "shop"
 	);
@@ -17,9 +20,6 @@ const [activeNav, setActiveNav] = useState(
 	useEffect(() => {
 			localStorage.setItem("activeNav", activeNav);
 		}, [activeNav]);
-const { user } = useSelector((state) => state.reducer.auth);
-const dispatch = useDispatch();
-const navigate = useNavigate();
 const {
 cart,
 addToCartError,
@@ -41,7 +41,8 @@ return (
 			<div className='grid grid-cols-2 '>
 				<Link
 					to='/'
-					className='lg:text-3xl text-xl font-bold flex items-center text-green-900'>
+					className='lg:text-3xl text-xl font-bold flex items-center text-green-900'
+					onClick={() => setActiveNav("shop")}>
 					E-SHOP
 				</Link>
 				<div className='flex items-center md:hidden'>
@@ -98,12 +99,12 @@ return (
 												{user.email}
 											</span>
 										</Dropdown.Header>
-										<Dropdown.Item>
-											<Link to='/dashboard'>Dashboard</Link>
-										</Dropdown.Item>
-										<Dropdown.Item>
-											<Link to='/setting'>Settings</Link>
-										</Dropdown.Item>
+										<Link to='/dashboard' className='block w-full text-center '>
+											<Dropdown.Item>Dashboard</Dropdown.Item>
+										</Link>
+										<Link to='/setting' className='block w-full text-center '>
+											<Dropdown.Item>Settings</Dropdown.Item>
+										</Link>
 										<Dropdown.Divider />
 										<Dropdown.Item onClick={handleLogout}>
 											Sign out
@@ -205,12 +206,12 @@ return (
 								{user.email}
 							</span>
 						</Dropdown.Header>
-						<Dropdown.Item>
-							<Link to='/dashboard'>Dashboard</Link>
-						</Dropdown.Item>
-						<Dropdown.Item>
-							<Link to='/setting'>Settings</Link>
-						</Dropdown.Item>
+						<Link to='/dashboard' className='block w-full text-center '>
+							<Dropdown.Item>Dashboard</Dropdown.Item>
+						</Link>
+						<Link to='/setting' className='block w-full text-center '>
+							<Dropdown.Item>Settings</Dropdown.Item>
+						</Link>
 						<Dropdown.Divider />
 						<Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
 					</Dropdown>

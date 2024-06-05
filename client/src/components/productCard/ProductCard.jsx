@@ -94,8 +94,11 @@ const ProductCard = ({ product }) => {
 									<BsFillCartCheckFill onClick={() => navigate("/cart")} />
 								</h1>
 							) : (
-								<h1 className='text-blue-600'>
-									<BsFillCartPlusFill onClick={handleAddToCart} />
+								<h1 className='text-blue-600 relative'>
+									<span
+										onClick={handleAddToCart}
+										className='animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75 duration-1000'></span>
+									<BsFillCartPlusFill className='' />
 								</h1>
 							)}
 						</div>
