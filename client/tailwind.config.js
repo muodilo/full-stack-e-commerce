@@ -13,6 +13,7 @@ export default {
   plugins: [
     daisyui,
     flowbite.plugin(),
+    require("tailwindcss-animate"),
   ],
 }
 

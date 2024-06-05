@@ -38,7 +38,7 @@ const KidsPage = () => {
 
 	return (
 		<section className='lg:px-[7rem] md:px-[5rem] px-2 '>
-			<div className=' border rounded-xl mt-5 grid  md:grid-cols-3 grid-cols-2 bg-blue-100 shadow '>
+			<div className=' border rounded-xl mt-5 grid  md:grid-cols-3 grid-cols-2 bg-blue-100 shadow animate-in fade-in zoom-in duration-500'>
 				<div className=''>
 					<img src={kidF1} alt='' className='h-48 md:h-auto' />
 				</div>
