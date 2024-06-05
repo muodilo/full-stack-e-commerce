@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Link } from "react-router-dom";
 import { RiMenu5Line } from "react-icons/ri";
 import { CiLogin } from "react-icons/ci";
@@ -10,6 +10,13 @@ import { Spinner } from "flowbite-react";
 import { getCart, resetCart } from "../../features/cart/cartSlice";
 
 const Navbar = () => {
+const [activeNav, setActiveNav] = useState(
+			localStorage.getItem("activeNav") || "shop"
+	);
+	
+	useEffect(() => {
+			localStorage.setItem("activeNav", activeNav);
+		}, [activeNav]);
 const { user } = useSelector((state) => state.reducer.auth);
 const dispatch = useDispatch();
 const navigate = useNavigate();
@@ -120,7 +127,7 @@ return (
 								<Link to='/women'>WOMEN</Link>
 							</li>
 							<li className='me-5  transition'>
-								<Link to='/kid'>KIDS</Link>
+								<Link to='/kids'>KIDS</Link>
 							</li>
 							<li className='me-5  transition'>
 								<Link to='/contact'>CONTACT</Link>
@@ -129,30 +136,55 @@ return (
 					</div>
 				</div>
 			</div>
-			<div className='md:flex md:items-center hidden lg:ms-16 ms-15 w-full'>
+			<div className='md:flex md:items-center md:justify-center hidden lg:ms-16 ms-15 w-full'>
 				<ul className='flex justify-around items-center w-full h-full text-white'>
 					<li className='me-4'>
-						<Link to='/' className='block  hover:text-black lg:text-xl'>
+						<Link
+							to='/'
+							className={`block duration-300  hover:text-black lg:text-xl ${
+								activeNav === "shop" ? "text-black" : "text-white"
+							}`}
+							onClick={() => setActiveNav("shop")}>
 							SHOP
 						</Link>
 					</li>
 					<li className='me-4'>
-						<Link to='/men' className='block  hover:text-black lg:text-xl'>
+						<Link
+							to='/men'
+							className={`block duration-300  hover:text-black lg:text-xl ${
+								activeNav === "men" ? "text-black" : "text-white"
+							}`}
+							onClick={() => setActiveNav("men")}>
 							MEN
 						</Link>
 					</li>
 					<li className='me-4'>
-						<Link to='/women' className='block  hover:text-black lg:text-xl'>
+						<Link
+							to='/women'
+							className={`block duration-300  hover:text-black lg:text-xl ${
+								activeNav === "women" ? "text-black" : "text-white"
+							}`}
+							onClick={() => setActiveNav("women")}>
 							WOMEN
 						</Link>
 					</li>
 					<li className='me-4'>
-						<Link to='/kids' className='block  hover:text-black lg:text-xl'>
+						<Link
+							to='/kids'
+							className={`block duration-300  hover:text-black lg:text-xl ${
+								activeNav === "kids" ? "text-black" : "text-white"
+							}`}
+							onClick={() => setActiveNav("kids")}>
 							KIDS
 						</Link>
 					</li>
 					<li className='me-4'>
-						<Link to='/contact' className='block  hover:text-black lg:text-xl'>
+						<Link
+							to='/contact'
+							className={`block duration-300  hover:text-black lg:text-xl ${
+								activeNav === "contact" ? "text-black" : "text-white"
+							}`}
+							onClick={() => setActiveNav("contact")}>
 							CONTACT
 						</Link>
 					</li>
