@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
-import WomenF1 from "../../assets/women2.png";
+import kidF1 from "../../assets/kids2.png";
 import SkeletonCard from "../../components/productCard/SkeletonCard";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	resetProduct,
-	getAllWomenProducts,
+	getAllKidsProducts,
 } from "../../features/products/productSlice";
 import ProductCard from "../../components/productCard/ProductCard";
 
-const WomenPage = () => {
+const KidsPage = () => {
 	const dispatch = useDispatch();
-	const { women, womenAreLoading, womenError, womenSuccess, womenMessage } = useSelector(
-		(state) => state.reducer.product
-	);
+	const { kids, kidsAreLoading, kidsError, kidsSuccess, kidsMessage } =
+		useSelector((state) => state.reducer.product);
 
 	const [searchQuery, setSearchQuery] = useState("");
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				await dispatch(getAllWomenProducts());
+				await dispatch(getAllKidsProducts());
 				dispatch(resetProduct());
 			} catch (error) {
 				console.error(error);
@@ -33,7 +32,7 @@ const WomenPage = () => {
 		setSearchQuery(e.target.value);
 	};
 
-	const filteredProducts = women.filter((product) =>
+	const filteredProducts = kids.filter((product) =>
 		product.name.toLowerCase().includes(searchQuery.toLowerCase())
 	);
 
@@ -41,17 +40,17 @@ const WomenPage = () => {
 		<section className='lg:px-[7rem] md:px-[5rem] px-2 '>
 			<div className=' border rounded-xl mt-5 grid  md:grid-cols-3 grid-cols-2 bg-blue-100 shadow '>
 				<div className=''>
-					<img src={WomenF1} alt='' className='h-48 md:h-auto' />
+					<img src={kidF1} alt='' className='h-48 md:h-auto' />
 				</div>
 				<div className='md:col-span-2  flex items-center justify-center'>
 					<div>
 						<h1 className='lg:text-7xl md:text-5xl   text-blue-500 md:text-left text-center'>
-							Discover Our Women's Collection
+							Discover Our Kids' Collection
 						</h1>
 						<p className='pt-2 text-slate-500 md:text-left text-center lg:text-2xl md:text-xl text-sm md:px-5 '>
-							Explore our women's collection for elegant and trendy fashion.
-							From chic dresses to casual wear, find the perfect outfit for
-							every occasion
+							Explore our kids' collection for fun and stylish fashion. From
+							playful everyday wear to special occasion outfits, find the
+							perfect clothes for every adventure.
 						</p>
 					</div>
 				</div>
@@ -79,11 +78,11 @@ const WomenPage = () => {
 				</label>
 			</div>
 			<div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3 '>
-				{womenAreLoading &&
+				{kidsAreLoading &&
 					[1, 2, 3, 4].map((product, index) => <SkeletonCard key={index} />)}
 
-				{!womenAreLoading &&
-					womenSuccess &&
+				{!kidsAreLoading &&
+					kidsSuccess &&
 					filteredProducts.map((product) => (
 						<ProductCard key={product._id} product={product} />
 					))}
@@ -92,4 +91,4 @@ const WomenPage = () => {
 	);
 };
 
-export default WomenPage;
+export default KidsPage;

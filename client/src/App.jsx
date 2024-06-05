@@ -13,6 +13,7 @@ import PlaceOrder from './pages/order/PlaceOrder';
 import Dashboard from './pages/dashboard/Dashboard';
 import ProductDetails from './pages/productDetails/ProductDetails';
 import WomenPage from './pages/womenPage/WomenPage';
+import KidsPage from './pages/KidsPage/KidsPage';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard/> } />
         <Route path='/products/:id' element={<ProductDetails/> } />
         <Route path='/women' element={<WomenPage/> } />
+        <Route path='/kids' element={<KidsPage/> } />
       </Routes>
       <Footer/>
       <ToastContainer/>

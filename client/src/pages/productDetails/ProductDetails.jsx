@@ -130,7 +130,7 @@ const handleShare = (id) => {
 				specificProductSuccess && (
 					<section className='text-gray-600 body-font overflow-hidden'>
 						<div className='container px-5 py-10 mx-auto '>
-							<div className='lg:w-4/5 mx-auto flex flex-wrap border p-3 rounded shadow bg-blue-100'>
+							<div className='lg:w-4/5 mx-auto flex flex-wrap border p-3 rounded shadow bg-blue-50/50'>
 								<img
 									alt='ecommerce'
 									className='lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded'

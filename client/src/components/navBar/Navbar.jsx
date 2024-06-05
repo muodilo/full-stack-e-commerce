@@ -129,7 +129,7 @@ return (
 					</div>
 				</div>
 			</div>
-			<div className='md:flex md:items-center hidden lg:ms-16 ms-15'>
+			<div className='md:flex md:items-center hidden lg:ms-16 ms-15 w-full'>
 				<ul className='flex justify-around items-center w-full h-full text-white'>
 					<li className='me-4'>
 						<Link to='/' className='block  hover:text-black lg:text-xl'>
