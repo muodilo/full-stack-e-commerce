@@ -3,6 +3,7 @@ import { getLatestWomenProducts,resetProduct } from '../../features/products/pro
 import { useDispatch, useSelector } from 'react-redux';
 import SkeletonCard from '../productCard/SkeletonCard';
 import ProductCard from '../productCard/ProductCard';
+import { Link } from 'react-router-dom';
 
 const LatestWomenProducts = () => {
 
@@ -39,9 +40,12 @@ const LatestWomenProducts = () => {
 						))}
 				</div>
 				<div className='text-center'>
-					<button className='btn btn-active animate-bounce'>
+					<Link
+						to='/women'
+						className='btn btn-active animate-bounce'
+						onClick={() => localStorage.setItem("activeNav", "women")}>
 						Explore more
-					</button>
+					</Link>
 				</div>
 			</div>
 		</section>

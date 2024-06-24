@@ -149,7 +149,7 @@ const handleShare = (id) => {
 									</p>
 									<div className='flex mt-20'>
 										<span className='title-font font-medium text-2xl text-gray-900 flex gap-6'>
-											<h1>{specificProduct.discountPrice} Rwf</h1>
+											<h1 className="text-green-500">{specificProduct.discountPrice} Rwf</h1>
 											<h1 className='text-red-500 line-through'>
 												{specificProduct.price} Rwf
 											</h1>

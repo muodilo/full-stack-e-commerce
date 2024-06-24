@@ -65,7 +65,7 @@ const ProductCard = ({ product }) => {
 				<a className='block relative h-48 rounded overflow-hidden'>
 					<img
 						alt='ecommerce'
-						className='object-cover object-center w-full h-full block hover:scale-125 transition'
+						className='object-cover object-center w-full h-full block hover:scale-125 transition duration-500'
 						src={product.images[0]}
 						onClick={handleClick}
 					/>
@@ -79,10 +79,10 @@ const ProductCard = ({ product }) => {
 					</h2>
 					<div className='grid grid-cols-2'>
 						<div className='flex'>
-							<p className='mt-1 me-3 text-green-500'>
+							<p className='mt-1 me-3 text-green-500 text-xs'>
 								Rwf {product.discountPrice}
 							</p>
-							<p className='mt-1 font-light line-through text-red-600'>
+							<p className='mt-1 font-light line-through text-red-600 text-xs'>
 								Rwf {product.price}
 							</p>
 						</div>
